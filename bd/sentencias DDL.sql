@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS localidades(
   localidad_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   pais VARCHAR (45) NOT NULL,
   provincia VARCHAR(45) NOT NULL,
-  ciudad VARCHAR (45) NOT NULL,
+  ciudad VARCHAR (45) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS campanias_localidades (
