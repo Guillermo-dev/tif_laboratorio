@@ -1,0 +1,11 @@
+{
+    "require": {
+        "catfan/medoo": "^2.1",
+        "bramus/router": "^1.6"
+    },
+    "autoload": {
+      "psr-4": {
+        "": ""
+      }
+    }
+}
