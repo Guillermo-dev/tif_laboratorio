@@ -4,6 +4,7 @@ namespace models;
 
 use Medoo\Medoo;
 use Exception;
+use PDO;
 
 abstract class Connection {
     // Coneccion con la bd con patron de diseño Singleton
@@ -22,6 +23,8 @@ abstract class Connection {
                     'username' => $config[2],
                     'password' => $config[3],
                     'port' => $config[4],
+
+                    'error' => PDO::ERRMODE_SILENT,
                 ]);
             } catch (Exception $e) {
                 //TODO:

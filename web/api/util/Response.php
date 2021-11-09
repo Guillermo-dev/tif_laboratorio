@@ -22,9 +22,6 @@ class Response implements JsonSerializable {
 
     private $status;
 
-
-    private $timestamp;
-
     private $data;
 
     private $error;
@@ -63,7 +60,6 @@ class Response implements JsonSerializable {
     private function __construct() {
         $this->code = self::OK;
         $this->status = self::$codeStatus[self::OK];
-        $this->timestamp = time();
         $this->data = null;
         $this->error = null;
     }
@@ -77,11 +73,6 @@ class Response implements JsonSerializable {
     public function getStatus(): string {
         return $this->status;
     }
-
-    public function getTimestamp(): int {
-        return $this->timestamp;
-    }
-
 
     public function getData(): ?array {
         return $this->data;

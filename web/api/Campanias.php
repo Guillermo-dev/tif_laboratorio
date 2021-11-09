@@ -5,7 +5,7 @@ namespace api;
 use Models\Campania;
 use api\util\Response;
 use api\util\Request;
-use api\exceptions\ApiException;
+use Exception;
 
 abstract class Campanias {
 
@@ -14,23 +14,32 @@ abstract class Campanias {
     }
 
     public static function createCampania(): void {
-        $emisorData = Request::getBodyAsJson();
-        if (!isset($emisorData->nombre))
-            throw new ApiException('Bad Request', Response::BAD_REQUEST);
+        //TODO: $campaniasData => $data
+        $campaniaData = Request::getBodyAsJson();
+        if (!isset($campaniaData->nombre))
+            throw new Exception('Bad Request', Response::BAD_REQUEST);
 
         $campania = new Campania();
         Campania::createCampania($campania);
     }
 
     public static function updateCampania(int $id): void {
-        $emisorData = Request::getBodyAsJson();
-        if (!isset($emisorData->nombre))
-            throw new ApiException('Bad Request', Response::BAD_REQUEST);
+        $campaniaData = Request::getBodyAsJson();
+        if (!isset($campaniaData->nombre))
+            throw new Exception('Bad Request', Response::BAD_REQUEST);
 
-        //TODO: getByID
+        $campania = Campania::getCampaniaById($id);
+        if (!$campania)
+            throw new Exception('La campania no existe', Response::NOT_FOUND);
+
+        Campania::updateCampania($campania);
     }
 
     public static function deleteCampania(int $id): void {
-        //TODO: getByID
+        $campania = Campania::getCampaniaById($id);
+        if (!$campania)
+            throw new Exception('La campania no existe', Response::NOT_FOUND);
+
+        Campania::deleteCampania($campania->getId());
     }
 }

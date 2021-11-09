@@ -3,7 +3,7 @@
 namespace models;
 
 use JsonSerializable;
-use Exceptions;
+use Exception;
 
 class Campania implements JsonSerializable {
 
@@ -87,7 +87,8 @@ class Campania implements JsonSerializable {
     public static function getCampanias(): array {
         $database = Connection::getDatabase();
 
-        $data = $database->select('Campanias', [
+        $campanias= null;
+        $campanias = $database->select('campanias', [
             'Campania_id',
             'nombre',
             'texto_SMS',
@@ -96,7 +97,31 @@ class Campania implements JsonSerializable {
             'cliente_id'
         ]);
 
-        return $data;
+        if (isset($database->error))
+            throw new Exception('Companias no encontradas: '.$database->error);
+
+        return $campanias;
+    }
+
+    public static function getCampaniaById(int $id): ?Campania {
+        $database = Connection::getDatabase();
+
+        $campanias= null;
+        $campanias = $database->select('campanias', [
+            'Campania_id',
+            'nombre',
+            'texto_SMS',
+            'cantidad_mensajes',
+            'estado',
+            'cliente_id'
+        ], [
+            'campania_id' => $id
+        ]);
+
+        if (isset($database->error))
+            throw new Exception('Compania no encontradas: '.$database->error);
+
+        return $campanias;
     }
 
     public static function createCampania(Campania $campania): void {
@@ -109,6 +134,9 @@ class Campania implements JsonSerializable {
             'estado' => $campania->getEstado(),
             'cliente_id' => $campania->getCliente_id
         ]);
+
+        if (isset($database->error))
+            throw new Exception('Error al crear la campania: '.$database->error);
     }
 
     public static function updateCampania(Campania $campania): void {
@@ -123,6 +151,9 @@ class Campania implements JsonSerializable {
         ], [
             'campania_id' => $campania->getId()
         ]);
+
+        if (isset($database->error))
+            throw new Exception('Error al actualizar la campania: '.$database->error);
     }
 
     public static function deleteCampania(int $campaniaId) {
@@ -133,5 +164,8 @@ class Campania implements JsonSerializable {
                 'campania_id' => $campaniaId
             ]
         ]);
+
+        if (isset($database->error))
+        throw new Exception('Error al borrar la campania: '.$database->error);
     }
 }

@@ -4,7 +4,6 @@ namespace api\util;
 
 use JsonSerializable;
 
-
 class ResponseError implements JsonSerializable {
 
     private $code;
