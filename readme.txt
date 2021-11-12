@@ -3,7 +3,7 @@ Trabajo final integrador laboratori de lenguajes 2021 UNSAdA
 Desarrollo dividido en dos pares, por un lado desarrollo web y por otro scripts de python
 
 Para el desarrollo se utilizaron los gestores de dependencias npm (Para JavaScript), composer (para PHP) y pip (para python)
-Antes de nada comprobar que se tienen instaladas estas herramientas:    mode.js (para nmp)
+Antes de nada comprobar que se tienen instaladas estas herramientas:    node.js (para nmp)
                                                                         composer
                                                                         python
 Una vez esto
