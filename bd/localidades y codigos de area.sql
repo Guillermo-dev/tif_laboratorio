@@ -42,5 +42,5 @@ INSERT INTO codigos_area (codigo) values (3786);
 INSERT INTO codigos_area (codigo) values (3758);
 INSERT INTO codigos_area (codigo) values (376);
 
-/*Prefijo de Argentina*/
+/*Prefijo de Argentina */
 INSERT INTO prefijos_internacionales (prefijo) values (54);
