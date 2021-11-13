@@ -1,5 +1,5 @@
 #Codigo fuente del script para generar los numeros telefonicos y guardarlos en la bd del punto 3
-#Falta terminar
+#Falta terminar 
 import random;
 import itertools;
 
