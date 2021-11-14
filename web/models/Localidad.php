@@ -72,12 +72,80 @@ class Localidad implements JsonSerializable {
         ]);
 
         if (isset($database->error))
-            throw new Exception('Localidades no encontradas: ' . $database->error);
+            throw new Exception($database->error);
 
         return $localidades;
     }
 
-    public static function createLocalidad(Localidad $localidad): void {
+    public static function getLocalidadesByCampaniaId(int $id): ?array {
+        $database = Connection::getDatabase();
+
+        $localidades = $database->select(
+            'localidades',
+            [
+                '[><]campanias_localidades' => ['localidad_id' => 'localidad_id'],
+                '[><]campanias' => ['campania_id', 'campania_id']
+            ],
+            [
+                'localidades.localidad_id',
+                'localidades.pais',
+                'localidades.provincia',
+                'localidades.ciudad'
+            ],
+            [
+                'campanias.campania_id' => $id
+            ]
+        );
+
+        $localidad = null;
+        if (!empty($localidades)) {
+            $localidad = new Localidad();
+            $localidad->setId($localidades[0]['localidad_id']);
+            $localidad->setPais($localidades[0]['pais']);
+            $localidad->setProvincia($localidades[0]['provincia']);
+            $localidad->setCiudad($localidades[0]['ciudad']);
+        }
+
+        if (isset($database->error))
+            throw new Exception($database->error);
+
+        return $localidad;
+    }
+
+    public static function getLocaldadesByPaisProvCiud(string $pais, string $provincia, string $ciudad): ?Localidad {
+        $database = Connection::getDatabase();
+
+        $localidades = $database->select(
+            'localidades',
+            [
+                'localidad_id',
+                'pais',
+                'provincia',
+                'ciudad'
+            ],
+            [
+                'pais' => $pais,
+                'provincia' => $provincia,
+                'ciudad' => $ciudad
+            ]
+        );
+
+        $localidad = null;
+        if (!empty($localidades)) {
+            $localidad = new Localidad();
+            $localidad->setId($localidades[0]['localidad_id']);
+            $localidad->setPais($localidades[0]['pais']);
+            $localidad->setProvincia($localidades[0]['provincia']);
+            $localidad->setCiudad($localidades[0]['ciudad']);
+        }
+
+        if (isset($database->error))
+            throw new Exception($database->error);
+
+        return $localidad;
+    }
+
+    public static function createLocalidad(Localidad $localidad): int {
         $database = Connection::getDatabase();
 
         $database->insert('localidades', [
@@ -88,7 +156,9 @@ class Localidad implements JsonSerializable {
         ]);
 
         if (isset($database->error))
-            throw new Exception('Error al crear la localidad: ' . $database->error);
+            throw new Exception($database->error);
+
+        return $database->id();
     }
 
     public static function updateLocalidad(Localidad $localidad): void {
@@ -104,7 +174,7 @@ class Localidad implements JsonSerializable {
         ]);
 
         if (isset($database->error))
-            throw new Exception('Error al actualizar la localidad ' . $database->error);
+            throw new Exception($database->error);
     }
 
     public static function deleteLocalidad(int $localidadId) {
@@ -117,8 +187,6 @@ class Localidad implements JsonSerializable {
         ]);
 
         if (isset($database->error))
-            throw new Exception('Error al borrar la localidad: ' . $database->error);
+            throw new Exception($database->error);
     }
-
-    //TODO: campanias_localidades
 }

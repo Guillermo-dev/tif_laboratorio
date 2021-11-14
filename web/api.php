@@ -12,7 +12,8 @@ include_once 'routes/api.php';
 try {
     $router->run();
 } catch (Exception $e) {
-    var_dump($e);
+    Response::getResponse()->setError($e->getMessage());
+    Response::getResponse()->setStatus('error');
+    Response::getResponse()->setData(null);
 }
-
 Response::getResponse()->send();

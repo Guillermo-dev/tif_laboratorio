@@ -17,14 +17,17 @@ class Campania implements JsonSerializable {
 
     private $estado;
 
+    private $fechaInicio;
+
     private $clienteId;
 
-    public function __construct(int $id = 0, string $nombre = '', string $textoSMS = '', string $cantidadMensajes = '', string $estado = '', int $clienteId = 0) {
+    public function __construct(int $id = 0, string $nombre = '', string $textoSMS = '', string $cantidadMensajes = '', string $estado = '', string $fechaInicio = '', int $clienteId = 0) {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->textoSMS = $textoSMS;
         $this->cantidadMensajes = $cantidadMensajes;
         $this->estado = $estado;
+        $this->fechaInicio = $fechaInicio;
         $this->clienteId = $clienteId;
     }
 
@@ -48,6 +51,10 @@ class Campania implements JsonSerializable {
 
     public function getEstado(): string {
         return $this->estado;
+    }
+
+    public function getFechaInicio(): string {
+        return $this->fechaInicio;
     }
 
     public function getClienteId(): string {
@@ -74,7 +81,11 @@ class Campania implements JsonSerializable {
         $this->estado = $estado;
     }
 
-    public function setClienteID(string $clienteId) {
+    public function setFechaInicio(string $fechaInicio) {
+        $this->fechaInicio = $fechaInicio;
+    }
+
+    public function setClienteId(string $clienteId) {
         $this->clienteId = $clienteId;
     }
 
@@ -87,18 +98,35 @@ class Campania implements JsonSerializable {
     public static function getCampanias(): array {
         $database = Connection::getDatabase();
 
-        $campanias= null;
+        $campanias = null;
         $campanias = $database->select('campanias', [
-            'Campania_id',
-            'nombre',
-            'texto_SMS',
-            'cantidad_mensajes',
-            'estado',
-            'cliente_id'
+            '[><]clientes' => ['cliente_id' => 'cliente_id'],
+            '[><]campanias_localidades' => ['campania_id' => 'campania_id'],
+            '[><]localidades' => ['localidad_id', 'localidad_id']
+        ], [
+            // Data campanias
+            'campanias.campania_id',
+            'campanias.nombre',
+            'campanias.texto_SMS',
+            'campanias.cantidad_mensajes',
+            'campanias.estado',
+            'campanias.fecha_inicio',
+            'campanias.cliente_id',
+            // Data clientes
+            'clientes.cuil_cuit',
+            'clientes.razon_social',
+            'clientes.nombre',
+            'clientes.apellido',
+            'clientes.telefono',
+            'clientes.email',
+            // Data localidad
+            'localidades.pais',
+            'localidades.provincia',
+            'localidades.ciudad'
         ]);
 
         if (isset($database->error))
-            throw new Exception('Companias no encontradas: '.$database->error);
+            throw new Exception('Companias no encontradas: ' . $database->error);
 
         return $campanias;
     }
@@ -106,25 +134,41 @@ class Campania implements JsonSerializable {
     public static function getCampaniaById(int $id): ?Campania {
         $database = Connection::getDatabase();
 
-        $campanias= null;
-        $campanias = $database->select('campanias', [
-            'Campania_id',
-            'nombre',
-            'texto_SMS',
-            'cantidad_mensajes',
-            'estado',
-            'cliente_id'
-        ], [
-            'campania_id' => $id
-        ]);
+        $campanias = $database->select(
+            'campanias',
+            [
+                'campania_id',
+                'nombre',
+                'texto_SMS',
+                'cantidad_mensajes',
+                'estado',
+                'fecha_inicio',
+                'cliente_id',
+            ],
+            [
+                'campania_id' => $id
+            ]
+        );
+
+        $campania = null;
+        if (!empty($campanias)) {
+            $campania = new Campania();
+            $campania->setId($campanias[0]['campania_id']);
+            $campania->setNombre($campanias[0]['nombre']);
+            $campania->setTextoSMS($campanias[0]['texto_SMS']);
+            $campania->setCantidadMensajes($campanias[0]['cantidad_mensajes']);
+            $campania->setEstado($campanias[0]['estado']);
+            $campania->setFechaInicio($campanias[0]['fecha_inicio']);
+            $campania->setClienteId($campanias[0]['cliente_id']);
+        }
 
         if (isset($database->error))
-            throw new Exception('Compania no encontradas: '.$database->error);
+            throw new Exception($database->error);
 
-        return $campanias;
+        return $campania;
     }
 
-    public static function createCampania(Campania $campania): void {
+    public static function createCampania(Campania $campania): int {
         $database = Connection::getDatabase();
 
         $database->insert('campanias', [
@@ -132,11 +176,14 @@ class Campania implements JsonSerializable {
             'texto_SMS' => $campania->getTextoSMS(),
             'cantidad_mensajes' => $campania->getCantidadMensajes(),
             'estado' => $campania->getEstado(),
+            'fecha_inicio' => $campania->getFechaInicio(),
             'cliente_id' => $campania->getCliente_id
         ]);
 
         if (isset($database->error))
-            throw new Exception('Error al crear la campania: '.$database->error);
+            throw new Exception($database->error);
+
+        return $database->id();
     }
 
     public static function updateCampania(Campania $campania): void {
@@ -147,13 +194,14 @@ class Campania implements JsonSerializable {
             'texto_SMS' => $campania->getTextoSMS(),
             'cantidad_mensajes' => $campania->getCantidadMensajes(),
             'estado' => $campania->getEstado(),
+            'fecha_inicio' => $campania->getFechaInicio(),
             'cliente_id' => $campania->getCliente_id
         ], [
             'campania_id' => $campania->getId()
         ]);
 
         if (isset($database->error))
-            throw new Exception('Error al actualizar la campania: '.$database->error);
+            throw new Exception($database->error);
     }
 
     public static function deleteCampania(int $campaniaId) {
@@ -166,6 +214,39 @@ class Campania implements JsonSerializable {
         ]);
 
         if (isset($database->error))
-        throw new Exception('Error al borrar la campania: '.$database->error);
+            throw new Exception($database->error);
+    }
+
+    public function isValidDate(string $fecha): bool {
+        $database = Connection::getDatabase();
+
+        return true;
+        if (isset($database->error))
+            throw new Exception($database->error);
+    }
+
+    public static function createCampaniaLocalida(int $campaniaId, int $localidadId): void {
+        $database = Connection::getDatabase();
+
+        $database->insert('campanias_localidades', [
+            'campania_id ' => $campaniaId,
+            'localidad_id ' => $localidadId,
+        ]);
+
+        if (isset($database->error))
+            throw new Exception($database->error);
+    }
+
+    public static function deleteCampaniaLocalida(int $campaniaId): void {
+        $database = Connection::getDatabase();
+
+        $database->delete('campanias_localidades', [
+            'AND' => [
+                'campania_id' => $campaniaId
+            ]
+        ]);
+
+        if (isset($database->error))
+            throw new Exception($database->error);
     }
 }

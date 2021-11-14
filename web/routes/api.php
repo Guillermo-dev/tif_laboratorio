@@ -8,13 +8,14 @@ if (isset($router)) {
     $router->get('', function () {
         Response::getResponse()->appendData('message', 'Welcome!');
     });
-    
+
     // Direcciones aca
     $router->get('/campanias', 'api\Campanias@getCampanias');
+    $router->get('/campanias/(\d+)', 'api\Campanias@getCampania');
 
     $router->set404(function () {
-        Response::getResponse()->setCode(Response::NOT_FOUND);
-        Response::getResponse()->setError('The end point does not exist', Response::NOT_FOUND);
+        Response::getResponse()->setError('The end point does not exist', 'NOT FOUND');
         Response::getResponse()->setData(null);
     });
 }
+

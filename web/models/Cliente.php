@@ -108,12 +108,87 @@ class Cliente implements JsonSerializable {
         ]);
 
         if (isset($database->error))
-            throw new Exception('Clientes no encontrados: ' . $database->error);
+            throw new Exception($database->error);
 
         return $clientes;
     }
 
-    public static function createCliente(Cliente $cliente): void {
+    public static function getClienteByCampaniaId(int $id): ?Cliente {
+        $database = Connection::getDatabase();
+
+        $clientes = $database->select(
+            'clientes',
+            ['[><]campanias' => ['cliente_id' => 'cliente_id'],],
+            [
+                'clientes.cliente_id',
+                'clientes.cuil_cuit',
+                'clientes.razon_social',
+                'clientes.nombre',
+                'clientes.apellido',
+                'clientes.telefono',
+                'clientes.email'
+            ],
+            [
+                'campanias.campania_id' => $id
+            ]
+        );
+
+        $cliente = null;
+        if (!empty($clientes)) {
+            $cliente = new CLiente();
+            $cliente->setId($clientes[0]['cliente_id']);
+            $cliente->setCuilCuit($clientes[0]['cuil_cuit']);
+            $cliente->setRazonSocial($clientes[0]['razon_social']);
+            $cliente->setNombre($clientes[0]['nombre']);
+            $cliente->setApellido($clientes[0]['apellido']);
+            $cliente->setTelefono($clientes[0]['telefono']);
+            $cliente->setEmail($clientes[0]['email']);
+        }
+
+        if (isset($database->error))
+            throw new Exception($database->error);
+
+        return $cliente;
+    }
+
+    public static function getClienteByCuilCuit(string $cuilCuit): ?Cliente {
+        $database = Connection::getDatabase();
+
+        $clientes = $database->select(
+            'clientes',
+            [
+                'cliente_id',
+                'cuil_cuit',
+                'razon_social',
+                'nombre',
+                'apellido',
+                'telefono',
+                'email'
+            ],
+            [
+                'cuil_cuit' => $cuilCuit
+            ]
+        );
+
+        $cliente = null;
+        if (!empty($clientes)) {
+            $cliente = new CLiente();
+            $cliente->setId($clientes[0]['cliente_id']);
+            $cliente->setCuilCuit($clientes[0]['cuil_cuit']);
+            $cliente->setRazonSocial($clientes[0]['razon_social']);
+            $cliente->setNombre($clientes[0]['nombre']);
+            $cliente->setApellido($clientes[0]['apellido']);
+            $cliente->setTelefono($clientes[0]['telefono']);
+            $cliente->setEmail($clientes[0]['email']);
+        }
+
+        if (isset($database->error))
+            throw new Exception($database->error);
+
+        return $cliente;
+    }
+
+    public static function createCliente(Cliente $cliente): int {
         $database = Connection::getDatabase();
 
         $database->insert('clientes', [
@@ -126,10 +201,12 @@ class Cliente implements JsonSerializable {
         ]);
 
         if (isset($database->error))
-            throw new Exception('Error al crear el usuario: ' . $database->error);
+            throw new Exception($database->error);
+
+        return $database->id();
     }
 
-    public static function updateCampania(Cliente $cliente): void {
+    public static function updateCliente(Cliente $cliente): void {
         $database = Connection::getDatabase();
 
         $database->update('clientes', [
@@ -144,7 +221,7 @@ class Cliente implements JsonSerializable {
         ]);
 
         if (isset($database->error))
-            throw new Exception('Error al actualizar el usuario: ' . $database->error);
+            throw new Exception($database->error);
     }
 
     public static function deleteCliente(int $clienteId) {
@@ -157,6 +234,6 @@ class Cliente implements JsonSerializable {
         ]);
 
         if (isset($database->error))
-            throw new Exception('Error al borrar el cliente: ' . $database->error);
+            throw new Exception($database->error);
     }
 }

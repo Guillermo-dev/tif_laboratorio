@@ -3,6 +3,8 @@
 namespace api;
 
 use Models\Campania;
+use models\Cliente;
+use models\Localidad;
 use api\util\Response;
 use api\util\Request;
 use Exception;
@@ -13,32 +15,156 @@ abstract class Campanias {
         Response::getResponse()->appendData('campanias', Campania::getCampanias());
     }
 
+    public static function getCampania(int $id = 0): void {
+        response::getResponse()->appendData('campania', Campania::getCampaniaById($id));
+        response::getResponse()->appendData('cliente', Cliente::getClienteByCampaniaId($id));
+        response::getResponse()->appendData('localidad', Localidad::getLocalidadesByCampaniaId($id));
+    }
+
     public static function createCampania(): void {
-        //TODO: $campaniasData => $data
-        $campaniaData = Request::getBodyAsJson();
-        if (!isset($campaniaData->nombre))
-            throw new Exception('Bad Request', Response::BAD_REQUEST);
+        $data = Request::getBodyAsJson();
+        if (!isset($data['campania']))
+            throw new Exception('Bad Request');
+        if (!isset($data['cliente']))
+            throw new Exception('Bad Request');
+        if (!isset($data['localidades']))
+            throw new Exception('Bad Request');
+
+        $cliente = Cliente::getClienteByCuilCuit($_GET['cliente']->cuilCuit);
+        if ($cliente) {
+            $clienteId = $cliente->getId();
+        } else {
+            $cliente = new Cliente();
+            if (isset($_GET['cliente']->cuilCuit))
+                $cliente->setCuilCuit($_GET['cliente']->cuilCuit);
+            else throw new Exception('Bad Request');
+
+            if (isset($_GET['cliente']->razonSocial))
+                $cliente->setRazonSocial($_GET['cliente']->razonSocial);
+            else throw new Exception('Bad Request');
+
+            if (isset($_GET['cliente']->nombre))
+                $cliente->setNombre($_GET['cliente']->nombre);
+            else throw new Exception('Bad Request');
+
+            if (isset($_GET['cliente']->apellido))
+                $cliente->setApellido($_GET['cliente']->apellido);
+            else throw new Exception('Bad Request');
+
+            if (isset($_GET['cliente']->telefono))
+                $cliente->setTelefono($_GET['cliente']->telefono);
+            else throw new Exception('Bad Request');
+
+            if (isset($_GET['cliente']->email))
+                $cliente->setEmail($_GET['cliente']->email);
+            else throw new Exception('Bad Request');
+
+            $clienteId = Cliente::createCliente($cliente);
+        }
+
+        $localidadesIds = [];
+        foreach ($_GET['localidades'] as $localidadData) {
+            $localidad = Localidad::getLocaldadesByPaisProvCiud($localidadData->pais, $localidadData->provincia, $localidadData->ciudad);
+            if ($localidad) {
+                $localidadesIds[] = $localidad->getId();
+            } else {
+                $localidad = new Localidad();
+                if (isset($localidadData->pais))
+                    $localidad->setPais($localidadData->pais);
+                else throw new Exception('Bad Request');
+
+                if (isset($localidadData->provincia))
+                    $localidad->setProvincia($localidadData->provincia);
+                else throw new Exception('Bad Request');
+
+                if (isset($localidadData->ciudad))
+                    $localidad->setCiudad($localidadData->ciudad);
+                else throw new Exception('Bad Request');
+
+                $localidadesIds[] = Localidad::createLocalidad($localidad);
+            }
+        }
 
         $campania = new Campania();
-        Campania::createCampania($campania);
+        if (isset($_GET['campania']->nombre))
+            $campania->setNombre($_GET['campania']->nombre);
+        else throw new Exception('Bad Request');
+
+        if (isset($_GET['campania']->textSMS))
+            $campania->setTextoSMS($_GET['campania']->textSMS);
+        else throw new Exception('Bad Request');
+
+        if (isset($_GET['campania']->cantidadMensajes))
+            $campania->setCantidadMensajes($_GET['campania']->cantidadMensajes);
+        else throw new Exception('Bad Request');
+
+        if (isset($_GET['campania']->estado))
+            $campania->setEstado($_GET['campania']->estado);
+        else throw new Exception('Bad Request');
+
+        if (isset($_GET['campania']->fechaInicio))
+            $campania->setFechaInicio($_GET['campania']->fechaInicio);
+        else throw new Exception('Bad Request');
+
+        $campania->setClienteId($clienteId);
+
+        $campaniaId = Campania::createCampania($campania);
+
+        foreach ($localidadesIds as $localidadId) {
+            Campania::createCampaniaLocalida($campaniaId, $localidadId);
+        }
     }
 
     public static function updateCampania(int $id): void {
-        $campaniaData = Request::getBodyAsJson();
-        if (!isset($campaniaData->nombre))
-            throw new Exception('Bad Request', Response::BAD_REQUEST);
+        $data = Request::getBodyAsJson();
+        if (!isset($data['campania']))
+            throw new Exception('Bad Request');
+        if (!isset($data['cliente']))
+            throw new Exception('Bad Request');
+        if (!isset($data['localidades']))
+            throw new Exception('Bad Request');
 
-        $campania = Campania::getCampaniaById($id);
-        if (!$campania)
-            throw new Exception('La campania no existe', Response::NOT_FOUND);
+        $campania = Campania::getCampaniaById($data['campania']->id_campania);
+        if (isset($_GET['campania']->nombre))
+            $campania->setNombre($_GET['campania']->nombre);
+        else throw new Exception('Bad Request');
 
+        if (isset($_GET['campania']->textSMS))
+            $campania->setTextoSMS($_GET['campania']->textSMS);
+        else throw new Exception('Bad Request');
+
+        if (isset($_GET['campania']->cantidadMensajes))
+            $campania->setCantidadMensajes($_GET['campania']->cantidadMensajes);
+        else throw new Exception('Bad Request');
+
+        if (isset($_GET['campania']->estado))
+            $campania->setEstado($_GET['campania']->estado);
+        else throw new Exception('Bad Request');
+
+        //TODO: validar fecha, si es que se puede cambiar
+        if (isset($_GET['campania']->fechaInicio))
+            $campania->setFechaInicio($_GET['campania']->fechaInicio);
+        else throw new Exception('Bad Request');
+
+        $localidadesIds = [];
+        foreach ($_GET['localidades'] as $localidadData) {
+            $localidad = Localidad::getLocaldadesByPaisProvCiud($localidadData->pais, $localidadData->provincia, $localidadData->ciudad);
+            if ($localidad) {
+                $localidadesIds[] = $localidad->getId();
+            } else
+                throw new Exception('La localidad no existe');
+        }
+        Campania::deleteCampaniaLocalida($data['campania']->id_campania);
+        foreach ($localidadesIds as $localidadId) {
+            Campania::createCampaniaLocalida($data['campania']->id_campania, $localidadId);
+        }
         Campania::updateCampania($campania);
     }
 
     public static function deleteCampania(int $id): void {
         $campania = Campania::getCampaniaById($id);
         if (!$campania)
-            throw new Exception('La campania no existe', Response::NOT_FOUND);
+            throw new Exception('La campania no existe');
 
         Campania::deleteCampania($campania->getId());
     }
