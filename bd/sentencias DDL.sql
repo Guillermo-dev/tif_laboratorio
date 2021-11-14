@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS campanias (
   campania_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(25) NOT NULL UNIQUE,
   texto_SMS TEXT NOT NULL,
-  cantidad_mensajes VARCHAR(10) NOT NULL CHECK (cantidad_mensajes IN ('7.000', '14.000', '21.000',' 28.000', '35.000', '42.000', '49.000', '56.000', '63.000', '70.000')),
+  cantidad_mensajes int NOT NULL CHECK (cantidad_mensajes IN (7000, 14000, 21000, 28000, 35000, 42000, 49000, 56000, 63000, 70000)),
   estado VARCHAR(10) NOT NULL CHECK (estado IN ( 'creada', 'en ejecucion', 'finalizada')),
   fecha_inicio DATE NOT NULL,
   cliente_id INT UNSIGNED NOT NULL,

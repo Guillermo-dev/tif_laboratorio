@@ -21,7 +21,7 @@ class Campania implements JsonSerializable {
 
     private $clienteId;
 
-    public function __construct(int $id = 0, string $nombre = '', string $textoSMS = '', string $cantidadMensajes = '', string $estado = '', string $fechaInicio = '', int $clienteId = 0) {
+    public function __construct(int $id = 0, string $nombre = '', string $textoSMS = '', int $cantidadMensajes = 0, string $estado = '', string $fechaInicio = '', int $clienteId = 0) {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->textoSMS = $textoSMS;
@@ -45,7 +45,7 @@ class Campania implements JsonSerializable {
         return $this->textoSMS;
     }
 
-    public function getCantidadMensajes(): string {
+    public function getCantidadMensajes(): int {
         return $this->cantidadMensajes;
     }
 
@@ -73,7 +73,7 @@ class Campania implements JsonSerializable {
         $this->textoSMS = $textoSMS;
     }
 
-    public function setCantidadMensajes(string $cantidadMensajes) {
+    public function setCantidadMensajes(int $cantidadMensajes) {
         $this->cantidadMensajes = $cantidadMensajes;
     }
 
@@ -201,7 +201,7 @@ class Campania implements JsonSerializable {
             throw new Exception($database->error);
     }
 
-    public function isValidDate(string $fecha): bool {
+    public function invalidFecha(string $fecha): bool {
         $database = Connection::getDatabase();
 
         return true;

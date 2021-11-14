@@ -74,6 +74,7 @@ abstract class Campanias {
             if ($localidad) {
                 $localidadesIds[] = $localidad->getId();
             } else {
+                // TODO: o exceptio de que no existe
                 $localidad = new Localidad();
                 if (isset($localidadData->pais))
                     $localidad->setPais($localidadData->pais);
@@ -175,6 +176,6 @@ abstract class Campanias {
         if (!$campania)
             throw new Exception('La campania no existe');
 
-        Campania::deleteCampania($campania->getId());
+        Campania::deleteCampania($id);
     }
 }
