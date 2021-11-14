@@ -97,22 +97,13 @@ class Localidad implements JsonSerializable {
             ]
         );
 
-        $localidad = null;
-        if (!empty($localidades)) {
-            $localidad = new Localidad();
-            $localidad->setId($localidades[0]['localidad_id']);
-            $localidad->setPais($localidades[0]['pais']);
-            $localidad->setProvincia($localidades[0]['provincia']);
-            $localidad->setCiudad($localidades[0]['ciudad']);
-        }
-
         if (isset($database->error))
             throw new Exception($database->error);
 
-        return $localidad;
+        return $localidades;
     }
 
-    public static function getLocaldadesByPaisProvCiud(string $pais, string $provincia, string $ciudad): ?Localidad {
+    public static function getLocaldadByPaisProvCiud(string $pais, string $provincia, string $ciudad): ?Localidad {
         $database = Connection::getDatabase();
 
         $localidades = $database->select(

@@ -74,7 +74,7 @@ class Campania implements JsonSerializable {
     }
 
     public function setCantidadMensajes(string $cantidadMensajes) {
-        $this->$cantidadMensajes = $cantidadMensajes;
+        $this->cantidadMensajes = $cantidadMensajes;
     }
 
     public function setEstado(string $estado) {
@@ -100,33 +100,17 @@ class Campania implements JsonSerializable {
 
         $campanias = null;
         $campanias = $database->select('campanias', [
-            '[><]clientes' => ['cliente_id' => 'cliente_id'],
-            '[><]campanias_localidades' => ['campania_id' => 'campania_id'],
-            '[><]localidades' => ['localidad_id', 'localidad_id']
-        ], [
-            // Data campanias
-            'campanias.campania_id',
-            'campanias.nombre',
-            'campanias.texto_SMS',
-            'campanias.cantidad_mensajes',
-            'campanias.estado',
-            'campanias.fecha_inicio',
-            'campanias.cliente_id',
-            // Data clientes
-            'clientes.cuil_cuit',
-            'clientes.razon_social',
-            'clientes.nombre',
-            'clientes.apellido',
-            'clientes.telefono',
-            'clientes.email',
-            // Data localidad
-            'localidades.pais',
-            'localidades.provincia',
-            'localidades.ciudad'
+            'campania_id',
+            'nombre',
+            'texto_SMS',
+            'cantidad_mensajes',
+            'estado',
+            'fecha_inicio',
+            'cliente_id'
         ]);
 
         if (isset($database->error))
-            throw new Exception('Companias no encontradas: ' . $database->error);
+            throw new Exception($database->error);
 
         return $campanias;
     }
