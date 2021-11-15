@@ -8,6 +8,7 @@ import configdb
 #HOST='localhost'
 #PORT='3307'
 
+#Coneccion con la bd con patron de diseño Singleton
 class Connection:
     __database = None
     

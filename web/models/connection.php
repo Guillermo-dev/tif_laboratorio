@@ -6,14 +6,16 @@ use Medoo\Medoo;
 use Exception;
 use PDO;
 
+// Coneccion con la bd con patron de diseño Singleton
 abstract class Connection {
-    // Coneccion con la bd con patron de diseño Singleton
     private static $database = null;
 
     public static function getDatabase() {
         if (self::$database == null) {
             try {
-                // estructura de archivo db-config: toda la informacion de configuracion junta y separada solo por punto y coma (;)
+                // Dentro de una carpeta 'web' crear una nueva carpeta llamada 'config' y ahi adentro un archivo llamado db-config
+                // Dentro de este escribir toda la informacion de configuracion de la db, separada solo por punto y coma (;)
+                // De la siguiente forma:
                 //Ej: localhost;laboratorio;root;;3307; 
                 $config = explode(';', file_get_contents('config/db-config'));
                 $database = new Medoo([
@@ -27,8 +29,7 @@ abstract class Connection {
                     'error' => PDO::ERRMODE_SILENT,
                 ]);
             } catch (Exception $e) {
-                //TODO:
-                var_dump($e);
+                throw new Exception($e);
             }
         }
         return $database;
