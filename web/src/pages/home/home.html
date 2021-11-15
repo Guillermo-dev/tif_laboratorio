@@ -4,9 +4,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campanias</title>
+
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Danna Fox</title>
 </head>
+
+
 <body>
-    <div>HOME</div>
+    <div class="buscador">
+        <input type="text" class="form-control p-2" placeholder="Buscar por ..." name="search" autocomplete="off">
+        <button type="submit" name="submitSearchBtn" class="bi-search "></button>
+
+    </div>
+    <div class="contenedor">
+        <div class="agregar pt-2 pb-2 mb-3 mt-3 border document">
+            <button onclick="window.location.href='campaña.html'" type="button" class="container p-3 text-center more-btn text-secondary" data-js="new-btn">
+                        <i class="bi-plus-lg me-3 "></i><span class="btn btn-dark font-weight-bold">+</span>
+                </button>
+        </div>
+
+        <div class="campania  mb-3 border document">
+            <div class="row g-2">
+                <div class="col-sm">
+                    <p class="mb-0 font-weight-bold">Nombre de la campaña</p>
+                    <p> campaña 1</p>
+                    <p class="mb-0 font-weight-bold">Fecha de la campaña</p>
+                    <p> fecha</p>
+                </div>
+                <div class="col-sm">
+                    <p class="mb-0 font-weight-bold">Cantidad de mensajes</p>
+                    <p> 2000</p>
+                    <p class="mb-0 font-weight-bold">Estado</p>
+                    <p> fecha</p>
+                </div>
+                <div class="col-sm">
+                    <p class="mb-0 font-weight-bold">Mensaje</p>
+                    <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis, quae. Tempore, iste. Vero cum nulla consectetur voluptatibus dolorem non provident! </p>
+                </div>
+                <div class="col-sm text-end  ">
+                    <button type="button" data-js="button" class="btn btn-warning btn-sm ">
+                        <i class="bi-shield-fill me-2"></i><span>Editar</span>
+                    </button>
+                    <button type="button" data-js="button" class="btn btn-danger btn-sm">
+                        <i class="bi-trash-fill me-2"></i><span>Eliminar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="vermas p-4 mb-3 border document" </div>
+            <p>vermas</p>
+        </div>
+    </div>
 </body>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </html>
+
+<!--   <div class="css-loading p-3 text-center h-100 d-flex justify-content-center align-items-center flex-column">
+                    <span class="spinner-border"></span>
+                </div>-->
+
