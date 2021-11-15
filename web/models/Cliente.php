@@ -96,7 +96,7 @@ class Cliente implements JsonSerializable {
     public static function getClientes(): array {
         $database = Connection::getDatabase();
 
-        $clientes = null;
+        $clientes = [];
         $clientes = $database->select('clientes', [
             'cliente_id',
             'cuil_cuit',

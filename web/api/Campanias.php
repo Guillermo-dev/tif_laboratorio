@@ -12,11 +12,20 @@ use Exception;
 abstract class Campanias {
 
     public static function getCampanias(): void {
-        $campanias = Campania::getCampanias();
-        foreach ($campanias as $campania) {
-            $campania['cliente'] = Cliente::getClienteByCampaniaId($campania['campania_id']);
-            $campania['localidades'] = Localidad::getLocalidadesByCampaniaId($campania['campania_id']);
-            Response::getResponse()->appendData('campanias', $campania);
+        if (isset($_GET['search'])) {
+            $campanias = Campania::getCampaniasSearch($_GET['search']);
+            foreach ($campanias as $campania) {
+                $campania['cliente'] = Cliente::getClienteByCampaniaId($campania['campania_id']);
+                $campania['localidades'] = Localidad::getLocalidadesByCampaniaId($campania['campania_id']);
+                Response::getResponse()->appendData('campanias', $campania);
+            }
+        } else {
+            $campanias = Campania::getCampanias();
+            foreach ($campanias as $campania) {
+                $campania['cliente'] = Cliente::getClienteByCampaniaId($campania['campania_id']);
+                $campania['localidades'] = Localidad::getLocalidadesByCampaniaId($campania['campania_id']);
+                Response::getResponse()->appendData('campanias', $campania);
+            }
         }
     }
 
@@ -35,6 +44,31 @@ abstract class Campanias {
             throw new Exception('Bad Request');
         if (!isset($data['localidades']))
             throw new Exception('Bad Request');
+
+        $localidadesIds = [];
+        foreach ($_GET['localidades'] as $localidadData) {
+            $localidad = Localidad::getLocaldadByPaisProvCiud($localidadData->pais, $localidadData->provincia, $localidadData->ciudad);
+            if ($localidad) {
+                $localidadesIds[] = $localidad->getId();
+            } else
+                throw new Exception('La localidad no existe');
+            /* TODO: O crear una nueva localidad
+                
+                    $localidad = new Localidad();
+                    if (isset($localidadData->pais))
+                        $localidad->setPais($localidadData->pais);
+                    else throw new Exception('Bad Request');
+    
+                    if (isset($localidadData->provincia))
+                        $localidad->setProvincia($localidadData->provincia);
+                    else throw new Exception('Bad Request');
+    
+                    if (isset($localidadData->ciudad))
+                        $localidad->setCiudad($localidadData->ciudad);
+                    else throw new Exception('Bad Request');
+    
+                    $localidadesIds[] = Localidad::createLocalidad($localidad);*/
+        }
 
         $cliente = Cliente::getClienteByCuilCuit($_GET['cliente']->cuilCuit);
         if ($cliente) {
@@ -68,30 +102,6 @@ abstract class Campanias {
             $clienteId = Cliente::createCliente($cliente);
         }
 
-        $localidadesIds = [];
-        foreach ($_GET['localidades'] as $localidadData) {
-            $localidad = Localidad::getLocaldadByPaisProvCiud($localidadData->pais, $localidadData->provincia, $localidadData->ciudad);
-            if ($localidad) {
-                $localidadesIds[] = $localidad->getId();
-            } else {
-                // TODO: o exceptio de que no existe
-                $localidad = new Localidad();
-                if (isset($localidadData->pais))
-                    $localidad->setPais($localidadData->pais);
-                else throw new Exception('Bad Request');
-
-                if (isset($localidadData->provincia))
-                    $localidad->setProvincia($localidadData->provincia);
-                else throw new Exception('Bad Request');
-
-                if (isset($localidadData->ciudad))
-                    $localidad->setCiudad($localidadData->ciudad);
-                else throw new Exception('Bad Request');
-
-                $localidadesIds[] = Localidad::createLocalidad($localidad);
-            }
-        }
-        //TODO: validar fecha
         $campania = new Campania();
         if (isset($_GET['campania']->nombre))
             $campania->setNombre($_GET['campania']->nombre);
@@ -112,6 +122,9 @@ abstract class Campanias {
         if (isset($_GET['campania']->fechaInicio))
             $campania->setFechaInicio($_GET['campania']->fechaInicio);
         else throw new Exception('Bad Request');
+
+        if (Campania::invalidFecha($campania->getFechaInicio(), $campania->getCantidadMensajes()))
+            throw new Exception('Fecha invalida');
 
         $campania->setClienteId($clienteId);
 
@@ -151,10 +164,12 @@ abstract class Campanias {
             $campania->setEstado($_GET['campania']->estado);
         else throw new Exception('Bad Request');
 
-        //TODO: validar fecha, si es que se puede cambiar
         if (isset($_GET['campania']->fechaInicio))
             $campania->setFechaInicio($_GET['campania']->fechaInicio);
         else throw new Exception('Bad Request');
+
+        if (Campania::invalidFecha($campania->getFechaInicio(), $campania->getCantidadMensajes()))
+            throw new Exception('Fecha invalida');
 
         $localidadesIds = [];
         foreach ($_GET['localidades'] as $localidadData) {

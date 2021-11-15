@@ -63,7 +63,7 @@ class Localidad implements JsonSerializable {
     public static function getLocalidades(): array {
         $database = Connection::getDatabase();
 
-        $localidades = null;
+        $localidades = [];
         $localidades = $database->select('localidades', [
             'localidad_id',
             'pais',
@@ -77,9 +77,10 @@ class Localidad implements JsonSerializable {
         return $localidades;
     }
 
-    public static function getLocalidadesByCampaniaId(int $id): ?array {
+    public static function getLocalidadesByCampaniaId(int $id): array {
         $database = Connection::getDatabase();
 
+        $localidades = [];
         $localidades = $database->select(
             'localidades',
             [
