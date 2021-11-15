@@ -3,3 +3,4 @@ node_modules
 vendor
 web/config/db-config.conf
 configdb.py
+__pycache__

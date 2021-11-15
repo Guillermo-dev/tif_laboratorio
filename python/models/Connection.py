@@ -12,8 +12,10 @@ import configdb
 class Connection:
     __database = None
     
+    @staticmethod
     def getConnection():
         if(Connection.__database == None):
+            return 10
             try:
                 Connection.__database = mariadb.connect(
                     user=configdb.USER,
