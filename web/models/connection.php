@@ -13,7 +13,7 @@ abstract class Connection {
     public static function getDatabase() {
         if (self::$database == null) {
             try {
-                // Dentro de una carpeta 'web' crear una nueva carpeta llamada 'config' y ahi adentro un archivo llamado db-config
+                // Dentro de una carpeta 'web' crear una nueva carpeta llamada 'config' y ahi adentro un archivo llamado db-config.conf
                 // Dentro de este escribir toda la informacion de configuracion de la db, separada solo por punto y coma (;)
                 // De la siguiente forma:
                 //Ej: localhost;laboratorio;root;;3307; 
