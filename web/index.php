@@ -11,5 +11,5 @@ include_once 'routes/web.php';
 try {
     $router->run();
 } catch (Exception $e) {
-    var_dump($e);
+    
 }

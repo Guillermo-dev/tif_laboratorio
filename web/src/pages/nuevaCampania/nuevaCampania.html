@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/src/pages/nuevaCampania/">
+    <link rel="stylesheet" href="nuevaCampania.css">
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <title>Danna Fox</title>
+</head>
+
+<body>
+    <div class="buscador">
+        <input type="text" class="form-control p-2" placeholder="Buscar por ..." name="search" autocomplete="off">
+        <button type="submit" name="submitSearchBtn" class="bi-search "></button>
+        <a href="javascript:history.back()" class="btn btn-dark ml-auto"> Icono para volver </a>
+    </div>
+    <div class="contenedor font-weight-bold">
+        <form>
+            <div class="form-group p-0 ">
+                <label for="campaña">Nombre de la campaña</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre de la campaña">
+            </div>
+            <!-- el nombre no se repite -->
+            <div class="form-group p-0">
+                <label for="fecha">Fecha</label>
+                <input type="date" class="form-control" id="fecha">
+            </div>
+            <div class="form-group p-0 ">
+                <label for="campaña">Cantidad de mensajes</label>
+                <select class="form-control form-control-sm">
+                    <option>7000</option>
+                    <option>14000</option>
+                    <option>21000</option>
+                    <option>28000</option>
+                    <option>35000</option>
+                    <option>42000</option>
+                    <option>56000</option>
+                    <option>63000</option>
+                    <option>70000</option>
+                  </select>
+            </div>
+            <div class="form-group p-0 ">
+                <label for="fecha">Estado</label>
+                <select class="form-control form-control-sm">
+                    <option>Activa</option>
+                    <option>Finalizada</option>
+                  </select>
+            </div>
+            <div class="form-group p-0 ">
+                <label for="mensaje">Mensaje</label>
+                <input type="text" class="form-control" id="mensaje" placeholder="Ingrese el nombre de la campaña, solo 160 caracteres">
+            </div>
+            <!-- Controlar la cantidad de caracteres -->
+            <button type="submit" class="btn btn-primary float-right">Agregar</button>
+        </form>
+    </div>
+
+
+</body>

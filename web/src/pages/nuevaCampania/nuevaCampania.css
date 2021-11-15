@@ -16,14 +16,6 @@ body {
     font-family: 'Roboto Condensed', serif;
 }
 
-.contenedor {
-    padding: 10px 10px 10px 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 4px 1px #18363d33;
-    height: 2000px;
-    width: auto;
-}
-
 .buscador {
     background-color: #5b2a67;
     display: flex;
@@ -46,19 +38,18 @@ body {
     border-color: #3d1746;
 }
 
-.agregar {
+.contenedor {
+    padding: 10px 10px 10px 10px;
+    overflow: hidden;
     box-shadow: 0 4px 4px 1px #18363d33;
-    display: flex;
+    width: auto;
+    height: auto;
 }
 
-.campania {
-    box-shadow: 0 4px 4px 1px #18363d33;
-}
 
-.campania>button {
-    text-align: center;
+/*
+.form>input {
+    border-color: #3d1746;
 }
-
-.vermas {
-    box-shadow: 0 4px 4px 1px #18363d33;
-}
+Quiero los bordes de los input de color violeta
+*/
