@@ -17,9 +17,9 @@ abstract class Connection {
                 // Dentro de este escribir toda la informacion de configuracion de la db, separada solo por punto y coma (;)
                 // De la siguiente forma:
                 //Ej: localhost;laboratorio;root;;3307; 
-                $config = explode(';', file_get_contents('config/db-config'));
-                $database = new Medoo([
-                    'type' => 'mysql',
+                $config = explode(';', file_get_contents('config/db-config.conf'));
+                self::$database = new Medoo([
+                    'type' => 'mariadb',
                     'host' => $config[0],
                     'database' => $config[1],
                     'username' => $config[2],
@@ -32,6 +32,6 @@ abstract class Connection {
                 throw new Exception($e);
             }
         }
-        return $database;
+        return self::$database;
     }
 }

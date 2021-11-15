@@ -19,4 +19,5 @@ Una vez instaladas (instalacion de dependencias/librerias/frameworks usadas el e
             pip install -r requirements
 
 Para la coneccion con la base de datos se utilizan archivos de configuracion, para cada cazo (web y python) dirigirce a la clase Connection
-Y crear los archivos mencionados 
+Y crear los archivos mencionados
+Para python es necesario crear uno por cada script

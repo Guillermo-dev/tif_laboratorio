@@ -2,6 +2,7 @@
 #Falta terminar
 import random;
 import itertools;
+from models.Connection import Connection
 
 codigo_area=[3329,4482,9948];
 repetir = 20;
