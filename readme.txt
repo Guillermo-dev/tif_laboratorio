@@ -18,5 +18,5 @@ Una vez instaladas (instalacion de dependencias/librerias/frameworks usadas el e
         Ejecutar el siguiente comando en la terminal:
             pip install -r requirements
 
-Para la coneccion con la base de datos se utilizan archivos de configuracion, paracada cazo (web y python) dirigirce a la clase Connection
+Para la coneccion con la base de datos se utilizan archivos de configuracion, para cada cazo (web y python) dirigirce a la clase Connection
 Y crear los archivos mencionados 
