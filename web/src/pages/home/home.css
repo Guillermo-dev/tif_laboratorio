@@ -1,5 +1,5 @@
-/*@import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";*/
-
+@import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 * {
     margin: 0;
     box-sizing: border-box;
@@ -40,6 +40,15 @@ body {
     width: auto;
 }
 
+.buscador>input::placeholder {
+    color: white;
+}
+
+.buscador>input.form-control::focus {
+    outline: none !important;
+    background-color: #3d1746 !important;
+}
+
 .buscador>button {
     width: 50px;
     background-color: #3d1746;
@@ -48,7 +57,6 @@ body {
 
 .agregar {
     box-shadow: 0 4px 4px 1px #18363d33;
-    display: flex;
 }
 
 .campania {

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/src/pages/home/">
     <link type="text/css" rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <title>Danna Fox</title>
 </head>
 
@@ -14,60 +14,62 @@
 <body>
     <div class="buscador">
         <input type="text" class="form-control p-2" placeholder="Buscar por ..." name="search" autocomplete="off">
-        <button type="submit" name="submitSearchBtn" class="bi-search "></button>
-
+        <button type="submit" name="submitSearchBtn" class="btn bi-search text-white"></button>
     </div>
+
     <div class="contenedor">
-        <div class="agregar pt-2 pb-2 mb-3 mt-3 border document">
-            <button onclick="window.location.href='/nuevaCampania'" type="button" class="container p-3 text-center more-btn text-secondary" data-js="new-btn">
-                        <i class="bi-plus-lg me-3 "></i><span class="btn btn-dark font-weight-bold">+</span>
-                </button>
+        <div class="mb-3 mt-3 p-0">
+            <button onclick="window.location.href='/nuevaCampania'" type="button" class="agregar p-3 text-center more-btn text-secondary w-100" data-js="new-btn">
+                        <i class="bi-plus-lg me-3 bg-black text-white rounded-2"></i>
+            </button>
         </div>
 
-        <div class="campania  mb-3 border document">
+        <div class="campania mb-3 p-0 border document">
             <div class="row g-2">
-                <div class="col-sm">
-                    <p class="mb-0 font-weight-bold">Nombre de la campaña</p>
+                <div class="col-sm-3">
+                    <p class="mb-0 fw-bold">Nombre de la campaña</p>
                     <p> campaña 1</p>
-                    <p class="mb-0 font-weight-bold">Fecha de la campaña</p>
+                    <p class="mb-0 fw-bold">Fecha de la campaña</p>
                     <p> fecha</p>
                 </div>
-                <div class="col-sm">
-                    <p class="mb-0 font-weight-bold">Cantidad de mensajes</p>
+                <div class="col-sm-2">
+                    <p class="mb-0 fw-bold">Cantidad de mensajes</p>
                     <p> 2000</p>
-                    <p class="mb-0 font-weight-bold">Estado</p>
+                    <p class="mb-0 fw-bold">Estado</p>
                     <p> fecha</p>
                 </div>
-                <div class="col-sm">
-                    <p class="mb-0 font-weight-bold">Mensaje</p>
+                <div class="col-sm-6">
+                    <p class="mb-0 fw-bold">Mensaje</p>
                     <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis, quae. Tempore, iste. Vero cum nulla consectetur voluptatibus dolorem non provident! </p>
                 </div>
-                <div class="col-sm text-end  ">
-                    <button type="button" data-js="button" class="btn btn-warning btn-sm ">
-                        <i class="bi-shield-fill me-2"></i><span>Editar</span>
+                <div class="col-sm-1 text-end d-flex flex-column justify-content-end align-items-end">
+                    <button type="button" data-js="button" class="btn btn-info btn-sm mb-2" style="max-width:50px ">
+                        <i class="bi-shield-fill "></i>
                     </button>
-                    <button type="button" data-js="button" class="btn btn-danger btn-sm">
-                        <i class="bi-trash-fill me-2"></i><span>Eliminar</span>
+                    <button type="button " data-js="button " class="btn btn-info btn-sm" style="max-width:50px; ">
+                        <i class="bi-trash-fill"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div class="vermas p-4 mb-3 border document" </div>
-            <p>vermas</p>
+
+        <div class="verMas mb-1 mt-1">
+            <button onclick="window.location.href='/nuevaCampania'" type="button" class=" btn agregar p-3 text-center more-btn text-secondary w-100" data-js="new-btn">
+                            <i class="bi-caret-down-fill me-3 rounded-2"></i>
+                </button>
         </div>
     </div>
 </body>
 
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
 
 </html>
 
-<!--   <div class="css-loading p-3 text-center h-100 d-flex justify-content-center align-items-center flex-column">
-                    <span class="spinner-border"></span>
+<!--   <div class="css-loading p-3 text-center h-100 d-flex justify-content-center align-items-center flex-column ">
+                    <span class="spinner-border "></span>
                 </div>-->
-

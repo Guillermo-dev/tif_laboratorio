@@ -1,5 +1,5 @@
-/*@import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";*/
-
+@import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 * {
     margin: 0;
     box-sizing: border-box;
@@ -25,14 +25,23 @@ body {
     border-top-right-radius: 10px;
 }
 
-.buscador>input {
+.buscador>div>input {
     background-color: #3d1746;
     border-color: #3d1746;
     color: rgb(0, 0, 0);
     width: auto;
 }
 
-.buscador>button {
+.buscador>div>input::placeholder {
+    color: white;
+}
+
+.buscador>div>input.form-control::focus {
+    outline: none !important;
+    background-color: #3d1746 !important;
+}
+
+.buscador>div>button {
     width: 50px;
     background-color: #3d1746;
     border-color: #3d1746;
