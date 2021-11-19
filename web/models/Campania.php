@@ -167,7 +167,6 @@ class Campania implements JsonSerializable {
         ], [
             'OR' => [
                 'nombre[~]' => $search,
-                'texto_SMS[~]' => $search,
                 'fecha_inicio[~]' => $search
             ]
         ]);
