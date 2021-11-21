@@ -104,7 +104,7 @@ class Localidad implements JsonSerializable {
         return $localidades;
     }
 
-    public static function getLocaldadByPaisProvCiud(string $pais, string $provincia, string $ciudad): ?Localidad {
+    public static function getLocalidadById(int $id): ?Localidad {
         $database = Connection::getDatabase();
 
         $localidades = $database->select(
@@ -116,9 +116,7 @@ class Localidad implements JsonSerializable {
                 'ciudad'
             ],
             [
-                'pais' => $pais,
-                'provincia' => $provincia,
-                'ciudad' => $ciudad
+                'localidad_id' => $id,
             ]
         );
 

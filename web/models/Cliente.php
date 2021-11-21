@@ -113,6 +113,32 @@ class Cliente implements JsonSerializable {
         return $clientes;
     }
 
+    public static function getClientesSearch(string $search): array {
+        $database = Connection::getDatabase();
+
+        $clientes = [];
+        $clientes = $database->select('clientes', [
+            'cliente_id',
+            'cuil_cuit',
+            'razon_social',
+            'nombre',
+            'apellido',
+            'telefono',
+            'email'
+        ],[
+            'OR' => [
+                'nombre[~]' => $search,
+                'apellido[~]' => $search,
+                'cuil_cuit[~]' => $search
+            ]
+        ]);
+
+        if (isset($database->error))
+            throw new Exception($database->error);
+
+        return $clientes;
+    }
+
     public static function getClienteByCampaniaId(int $id): ?Cliente {
         $database = Connection::getDatabase();
 
@@ -151,7 +177,7 @@ class Cliente implements JsonSerializable {
         return $cliente;
     }
 
-    public static function getClienteByCuilCuit(string $cuilCuit): ?Cliente {
+    public static function getClienteById(int $id): ?Cliente {
         $database = Connection::getDatabase();
 
         $clientes = $database->select(
@@ -166,7 +192,7 @@ class Cliente implements JsonSerializable {
                 'email'
             ],
             [
-                'cuil_cuit' => $cuilCuit
+                'cliente_id' => $id
             ]
         );
 

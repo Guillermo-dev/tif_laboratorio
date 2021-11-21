@@ -268,7 +268,7 @@ class Campania implements JsonSerializable {
             throw new Exception($database->error);
     }
 
-    public static function deleteCampaniaLocalida(int $campaniaId): void {
+    public static function deleteCampaniasLocalidades(int $campaniaId): void {
         $database = Connection::getDatabase();
 
         $database->delete('campanias_localidades', [
