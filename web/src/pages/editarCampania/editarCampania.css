@@ -4,6 +4,7 @@
     margin: 0;
     box-sizing: border-box;
     padding: 10px 10px 10px 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 body {
@@ -13,7 +14,6 @@ body {
     max-width: 100vw;
     min-height: 100vh;
     overflow-x: hidden;
-    font-family: 'Roboto Condensed', serif;
 }
 
 .buscador {
