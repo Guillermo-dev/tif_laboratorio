@@ -214,7 +214,7 @@ class Cliente implements JsonSerializable {
         return $cliente;
     }
 
-    public static function createCliente(Cliente $cliente): int {
+    public static function createCliente(Cliente $cliente): void {
         $database = Connection::getDatabase();
 
         $database->insert('clientes', [
@@ -228,8 +228,8 @@ class Cliente implements JsonSerializable {
 
         if (isset($database->error))
             throw new Exception($database->error);
-
-        return $database->id();
+        
+        $cliente->setId($database->id());
     }
 
     public static function updateCliente(Cliente $cliente): void {

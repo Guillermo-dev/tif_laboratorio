@@ -177,7 +177,7 @@ class Campania implements JsonSerializable {
         return $campanias;
     }
 
-    public static function createCampania(Campania $campania): int {
+    public static function createCampania(Campania $campania): void {
         $database = Connection::getDatabase();
 
         $database->insert('campanias', [
@@ -192,7 +192,7 @@ class Campania implements JsonSerializable {
         if (isset($database->error))
             throw new Exception($database->error);
 
-        return $database->id();
+        $campania->setId($database->id());
     }
 
     public static function updateCampania(Campania $campania): void {

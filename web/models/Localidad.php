@@ -135,7 +135,7 @@ class Localidad implements JsonSerializable {
         return $localidad;
     }
 
-    public static function createLocalidad(Localidad $localidad): int {
+    public static function createLocalidad(Localidad $localidad): void {
         $database = Connection::getDatabase();
 
         $database->insert('localidades', [
@@ -148,7 +148,7 @@ class Localidad implements JsonSerializable {
         if (isset($database->error))
             throw new Exception($database->error);
 
-        return $database->id();
+        $localidad->setId($database->id());
     }
 
     public static function updateLocalidad(Localidad $localidad): void {

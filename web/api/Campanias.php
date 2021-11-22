@@ -42,42 +42,13 @@ abstract class Campanias {
 
         if (isset($data['cliente'])) {
             $cliente = Cliente::getClienteById($data['cliente']->id);
-            if ($cliente != null) {
+            if ($cliente != null)
                 $clienteId = $cliente->getId();
-            } else {
+            else
                 throw new Exception('El cliente no existe');
-                /* TODO: 
-                $cliente = new Cliente();
-                if (isset($data['cliente']->cuilCuit))
-                    $cliente->setCuilCuit($data['cliente']->cuilCuit);
-                else throw new Exception('Cuil/Cuit de cliente requerido');
-
-                if (isset($data['cliente']->razonSocial))
-                    $cliente->setRazonSocial($data['cliente']->razonSocial);
-                else throw new Exception('Razon social de cliente requerida');
-
-                if (isset($data['cliente']->nombre))
-                    $cliente->setNombre($data['cliente']->nombre);
-                else throw new Exception('Nombre de cliente requerido');
-
-                if (isset($data['cliente']->apellido))
-                    $cliente->setApellido($data['cliente']->apellido);
-                else throw new Exception('Apellido de cliente requerido');
-
-                if (isset($data['cliente']->telefono))
-                    $cliente->setTelefono($data['cliente']->telefono);
-                else throw new Exception('Telefono de cliente requerido');
-
-                if (isset($data['cliente']->email))
-                    $cliente->setEmail($data['cliente']->email);
-                else throw new Exception('Email de cliente requerido');
-
-                $clienteId = Cliente::createCliente($cliente);
-                */
-            }
         } else
             throw new Exception('Datos del cliente requerido');
-            
+
         $campania = new Campania();
         if (isset($data['campania']->nombre))
             $campania->setNombre($data['campania']->nombre);
@@ -102,10 +73,10 @@ abstract class Campanias {
 
         $campania->setClienteId($clienteId);
 
-        $campaniaId = Campania::createCampania($campania);
+        Campania::createCampania($campania);
 
         foreach ($localidadesIds as $localidadId) {
-            Campania::createCampaniaLocalida($campaniaId, $localidadId);
+            Campania::createCampaniaLocalida($campania->getId(), $localidadId);
         }
     }
 
@@ -150,41 +121,11 @@ abstract class Campanias {
             $cliente = Cliente::getClienteById($data['cliente']->id);
             if ($cliente != null)
                 $campania->setClienteId($cliente->getId());
-                /* TODO:
-            else {
-                $cliente = new Cliente();
-                if (isset($data['cliente']->cuilCuit))
-                    $cliente->setCuilCuit($data['cliente']->cuilCuit);
-                else throw new Exception('Cuil/Cuit de cliente requerido');
-
-                if (isset($data['cliente']->razonSocial))
-                    $cliente->setRazonSocial($data['cliente']->razonSocial);
-                else throw new Exception('Razon social de cliente requerida');
-
-                if (isset($data['cliente']->nombre))
-                    $cliente->setNombre($data['cliente']->nombre);
-                else throw new Exception('Nombre de cliente requerido');
-
-                if (isset($data['cliente']->apellido))
-                    $cliente->setApellido($data['cliente']->apellido);
-                else throw new Exception('Apellido de cliente requerido');
-
-                if (isset($data['cliente']->telefono))
-                    $cliente->setTelefono($data['cliente']->telefono);
-                else throw new Exception('Telefono de cliente requerido');
-
-                if (isset($data['cliente']->email))
-                    $cliente->setEmail($data['cliente']->email);
-                else throw new Exception('Email de cliente requerido');
-
-                $clienteId = Cliente::createCliente($cliente);
-            } 
-            */
         }
 
         Campania::deleteCampaniasLocalidades($data['campania']->id_campania);
         foreach ($localidadesIds as $localidadId) {
-            Campania::createCampaniaLocalida($data['campania']->id_campania, $localidadId);
+            Campania::createCampaniaLocalida($campania->getId(), $localidadId);
         }
 
         Campania::updateCampania($campania);
