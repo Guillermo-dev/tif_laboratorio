@@ -2,15 +2,18 @@
 #Falta terminar
 import random;
 import itertools;
-from models.Connection import Connection
+from models.Connection import Connection;
 
-codigo_area=[3329,4482,9948];
+cur = Connection.getConnection();
+cur.execute("SELECT MAX(codigo_area_id) FROM codigos_area;");
+
+
 repetir = 20;
 
 for _ in itertools.repeat(None, repetir):
 	nro = random.randrange(100000, 999999);
-	#telefono = styr(codigo_area[random.randrange(1,3)]) + " " + str(nro);
-	codigo= random.randrange(10,9999);
-	print("-");
-	print("codigo area: ", codigo);
-	print ("telefono: ",nro);
+	codigo= random.randrange(1,cur);
+	localidad = codigo;
+	query = str("INSERT INTO numeros (numero,localidad_id,prefijo_internacional_id,codigo_area_id) values ("+str(nro)+","+str(localidad)+",1,"+str(codigo)+");")
+	print (query)
+	cur.execute(query);
