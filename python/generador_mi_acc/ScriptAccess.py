@@ -5,9 +5,9 @@ from models.Connection import Connection
 
 "Creacion y conexion del archivo Microsoft Access"
 
-
+'cantCampanias=Connection.__database.cursor("SELECT COUNT(*)FROM campanias")'
 i=0
-while (i<10):
+while (i<10 and 'i<cantCampanias'):
     msaccessdb.create(r'D:\Escritorio\archivo'+ str(i) +'.accdb')
     conn_str = (
         r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
