@@ -180,6 +180,7 @@ class Campania implements JsonSerializable {
     public static function createCampania(Campania $campania): void {
         $database = Connection::getDatabase();
 
+        //TODO: estad
         $database->insert('campanias', [
             'nombre' => $campania->getNombre(),
             'texto_SMS' => $campania->getTextoSMS(),

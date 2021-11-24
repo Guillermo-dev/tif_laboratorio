@@ -7,77 +7,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/src/pages/editarCliente/">
     <link type="text/css" rel="stylesheet" href="editarCliente.css">
-
     <title>Danna Fox</title>
 </head>
 
-
 <body>
-    <div class="contenedor">
+    <div class="contenedor pb-4">
+        <!-- Nav -->
         <div class="buscador row">
             <div class="col-md">
-            </div>
-            <div class="col-md-auto">
-                <button onclick="window.location.href='/clientes' " type="button" class="cliente btn btn-primary bi-people-fill p-2"><span class="ms-2 ">Volver</span></button>
+                <div class="row g-0 justify-content-end">
+                    <button onclick="window.location.href='/clientes' " type="button" class="cliente btn btn-primary bi-people-fill p-2 col-md-auto text-center list-wrapper">
+                        <span class="ms-2">Volver</span>
+                    </button>
+                </div>
             </div>
         </div>
-
-    </div>
-
-    <div class="contenedor font-weight-bold">
-        <div class="encabezadoDoc text-center" id="encabezadoDoc">
-            <h3 bg-secondary bg-opacity-25>Editar Cliente</h3>
-        </div>
-        <div class="row">
-            <div class="col-sm-2">
+        <!-- Form -->
+        <div class="container p-0 mt-3 rounded-top rounded contenedor font-weight-bold">
+            <div class="encabezadoDoc text-center" id="encabezadoDoc">
+                <h3 class="bg-secondary bg-opacity-25">Editar Cliente</h3>
             </div>
-            <div class="col-sm-8">
-                <form>
-                    <div class="form-group p-0 fw-bold">
-                        <label for="campaña">Cuil/Cuit<span class="text-danger p-0">*</span></label>
-                        <input type="text " class="form-control " id="cuil" placeholder="Ingrese su cuil o cuit ">
+            <form class="p-4">
+                <div class="form-group mb-3">
+                    <label class="fw-bold" for="campaña">Cuil/Cuit<span class="text-danger">*</span></label>
+                    <input type="text " class="form-control " id="cuil" placeholder="Ingrese el cuil o cuit del cliente">
+                </div>
+                <div class="row g-3">
+                    <div class="col-sm mb-3">
+                        <label class="fw-bold" for="campaña">Nombre<span class="text-danger">*</span></label>
+                        <input type="text " class="form-control " id="nombre " placeholder="Ingrese el nombre del cliente">
                     </div>
-
-                    <div class="row g-3  p-0">
-                        <div class="col-sm  fw-bold">
-                            <label for="campaña">Nombre<span class="text-danger p-0">*</span></label>
-                            <input type="text " class="form-control " id="nombre " placeholder="Ingrese su nombre ">
-                        </div>
-                        <div class="col-sm fw-bold">
-                            <label for="campaña">Apellido<span class="text-danger p-0">*</span></label>
-                            <input type="text " class="form-control " id="nombre " placeholder="Ingrese su apellido ">
-                        </div>
+                    <div class="col-sm">
+                        <label class="fw-bold" for="campaña">Apellido<span class="text-danger">*</span></label>
+                        <input type="text " class="form-control " id="nombre " placeholder="Ingrese el apellido del cliente">
                     </div>
-
-                    <div class="form-group p-0 fw-bold ">
-                        <label for="campaña ">Razón Social<span class="text-danger p-0">*</span></label>
-                        <select class="form-control form-control-sm ">
-                            <option>Seleccione una opción</option>
-                            <option>Monotributista</option>
-                            <option>Consumidor Final</option>
-                            <option>Responsable inscripto</option>
-                        </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label class ="fw-bold" for="campaña">Razón Social<span class="text-danger">*</span></label>
+                    <select class="form-control form-control">
+                        <option>Seleccione una opción</option>
+                        <option>Monotributista</option>
+                        <option>Consumidor Final</option>
+                        <option>Responsable inscripto</option>
+                    </select>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-sm">
+                        <label class="fw-bold" for="campaña">Teléfono<span class="text-danger">*</span></label>
+                        <input type="text " class="form-control " id="nombre " placeholder="Ingrese el teléfono del cliente">
                     </div>
-
-                    <div class="row g-3  p-0">
-                        <div class="col-sm  fw-bold">
-                            <label for="campaña">Teléfono<span class="text-danger p-0">*</span></label>
-                            <input type="text " class="form-control " id="nombre " placeholder="Ingrese su teléfono ">
-                        </div>
-                        <div class="col-sm fw-bold">
-                            <label for="campaña">E-mail<span class="text-danger p-0">*</span></label>
-                            <input type="email" class="form-control " id="nombre " placeholder="Ingrese su email">
-                        </div>
+                    <div class="col-sm">
+                        <label class=" fw-bold" for="campaña">E-mail<span class="text-danger">*</span></label>
+                        <input type="email" class="form-control " id="nombre " placeholder="Ingrese el email del cliente">
                     </div>
-                    <span class="text-danger fw-bold p-0">*Campos Obligatorios</span>
-                    <div class="text-end p-0 mt-2">
-                        <button type="submit " class="btn btn-secondary">Agregar</button>
-                    </div>
-                    <div class="col-sm-2">
-                    </div>
-                </form>
-            </div>
-
+                </div>
+                <span class="text-danger fw-bold">*Campos Obligatorios</span>
+                <div class="text-end mt-2">
+                    <button type="submit " class="btn btn-secondary">Agregar</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

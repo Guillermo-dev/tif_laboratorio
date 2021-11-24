@@ -11,84 +11,82 @@
     <title>Danna Fox</title>
 </head>
 
-
 <body>
     <div class="contenedor">
-
+        <!-- Nav -->
         <div class="buscador row">
             <div class=" col-md-auto">
-                <div class="p-0 input-group">
-                    <input type="text" class="form-control p-2" placeholder="Buscar por nombre o fecha" name="search" autocomplete="off">
+                <div class="input-group">
+                    <input type="text" class="form-control p-2" placeholder="Buscar por cuil/cuit" name="search" autocomplete="off">
                     <button type="submit" name="submitSearchBtn" class="lupa btn bi-search text-white"></button>
                 </div>
             </div>
             <div class="col-md">
-
-            </div>
-            <div class="col-md-auto">
-                <button onclick="window.location.href='/clientes' " type="button" class="cliente btn btn-primary bi-people-fill p-2"><span class="ms-2 ">Clientes</span></button>
-            </div>
-        </div>
-
-        <div class="agregar mt-3">
-            <div class="container p-0 text-center more-btn text-secondary mb-2 shadow border" data-js="new-btn ">
-                <!-- BOTON AGREGAR CAMPAÑA -->
-                <button onclick="window.location.href='/nuevaCampania' " type="button " class=" btn agregar p-3 text-center more-btn text-secondary w-100 " data-js="new-btn"><i class="bi-plus-lg d-inline-block p-1 px-2 bg-dark text-white rounded-1 "></i> <span class="fw-bold"> Nueva Campaña </span></button>
-            </div>
-        </div>
-
-        <div class="capaniasLista">
-            <div class="campania p-0 mb-3 border">
-                <div class="row g-2 p-0">
-                    <div class="col ">
-                        <!-- NOMBRE Y FECHA -->
-                        <p class="mb-0 fw-bold ">Nombre de la campaña</p>
-                        <p> campaña 1</p>
-                        <p class="mb-0 fw-bold ">Fecha de la campaña</p>
-                        <p> fecha</p>
-                    </div>
-                    <div class="col-sm-2 ">
-                        <!-- CANTIDAD Y ESTADO -->
-                        <p class="mb-0 fw-bold ">Cantidad de mensajes</p>
-                        <p> 2000</p>
-                        <p class="mb-0 fw-bold ">Estado</p>
-                        <p> fecha</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <!-- MENSAJE -->
-                        <p class="mb-0 fw-bold ">Mensaje</p>
-                        <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis, quae. Tempore, iste. Vero cum nulla consectetur voluptatibus dolorem non provident! </p>
-                    </div>
-                    <div class="col-sm-1 d-flex justify-content-end align-items-end">
-                        <!--FIXME: ID HARCODEADA-->
-                        <button onclick="window.location.href='/editarCampania/1' " type="button " class="botonlindo" data-js="button" style="max-width:50px "><i class="bi-pencil-square h2 p-0"></i></button></button>
-                        <button type="button " data-js="button " class="botonlindo" style="max-width:50px "> <!-- EDITAR CAMPAÑA -->
-                               
+                <div class="row justify-content-end">
+                    <button onclick="window.location.href='/clientes' " type="button" class="cliente btn btn-primary bi-people-fill p-2 col-md-auto text-center list-wrapper">
+                        <span class="ms-2">Clientes</span>
                     </button>
-
-                        <button type="button " data-js="button " class="botonlindo" style="max-width:50px; ">
-                                <i class="bi-trash-fill h2 p-0"></i>  <!-- ELIMINAR CAMPAÑA -->
-                    </button>
-                    </div>
                 </div>
             </div>
         </div>
 
-
-        <div class="verMas mb-1 mt-1 shadow border p-0">
-            <button onclick="" type="button " class=" btn agregar text-center more-btn text-secondary w-100 " data-js="new-btn ">
-                        <i class="bi-caret-down-fill me-3 rounded-2 "></i>
+        <div class="container">
+            <!-- BOTON AGREGAR CAMPAÑA -->
+            <div class="agregar mt-3">
+                <div class="text-center more-btn text-secondary mb-2 shadow border" data-js="new-btn ">
+                    <button onclick="window.location.href='/nuevaCampania' " type="button " class=" btn agregar p-3 text-center more-btn text-secondary w-100 " data-js="new-btn">
+                        <i class="bi-plus-lg d-inline-block p-1 px-2 bg-dark text-white rounded-1 "></i> <span class="fw-bold"> Nueva Campaña </span>
                     </button>
-        </div>
+                </div>
+            </div>
 
+            <div class="capaniasLista py-3">
+                <div class="campania p-3 mb-3 border">
+                    <div class="row g-2">
+                        <div class="col-sm-3 p-2 ps-4">
+                            <!-- NOMBRE Y FECHA -->
+                            <p class="mb-0 fw-bold ">Nombre de la campaña</p>
+                            <p> campaña 1</p>
+                            <p class="mb-0 fw-bold ">Fecha de la campaña</p>
+                            <p> fecha</p>
+                        </div>
+                        <div class="col-sm-3 p-2">
+                            <!-- CANTIDAD Y ESTADO -->
+                            <p class="mb-0 fw-bold ">Cantidad de mensajes</p>
+                            <p> 2000</p>
+                            <p class="mb-0 fw-bold ">Estado</p>
+                            <p> fecha</p>
+                        </div>
+                        <div class="col-sm-3 p-2">
+                            <!-- MENSAJE -->
+                            <p class="mb-0 fw-bold ">Mensaje</p>
+                            <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis, quae. Tempore, iste. Vero cum nulla consectetur voluptatibus dolorem non provident! </p>
+                        </div>
+                        <div class="col-sm-3 d-flex justify-content-end align-items-end">
+                            <!-- EDITAR CAMPAÑA --><!--FIXME: ID HARCODEADA-->
+                            <button onclick="window.location.href='/editarCampania/1' " type="button " class="botonlindo" data-js="button" style="max-width:50px ">
+                                <i class="bi-pencil-square h2"></i>
+                            </button>
+                            <!-- ELIMINAR CAMPAÑA -->
+                            <button type="button " data-js="button " class="botonlindo" style="max-width:50px; ">
+                                <i class="bi-trash-fill h2"></i>  
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="verMas mb-1 mt-1 shadow border">
+                <button onclick="" type="button " class=" btn agregar text-center more-btn text-secondary w-100 p-3" data-js="new-btn ">
+                    <i class="bi-caret-down-fill me-3 rounded-2 "></i>
+                </button>
+            </div>
+        </div>
     </div>
 </body>
 
 <footer>
     <div class="">
-
     </div>
-
 </footer>
 
 </html>

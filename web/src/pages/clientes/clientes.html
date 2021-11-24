@@ -12,74 +12,79 @@
 
 <body>
     <div class="contenedor">
-
+        <!-- Nav -->
         <div class="buscador row">
             <div class=" col-md-auto">
-                <div class="p-0 input-group">
+                <div class="input-group">
                     <input type="text" class="form-control p-2" placeholder="Buscar por cuil/cuit" name="search" autocomplete="off">
                     <button type="submit" name="submitSearchBtn" class="lupa btn bi-search text-white"></button>
                 </div>
             </div>
             <div class="col-md">
-
-            </div>
-            <div class="col-md-auto">
-                <button onclick="window.location.href='/' " type="button" class="cliente btn btn-primary bi-people-fill p-2"><span class="ms-2 ">Volver</span></button>
-            </div>
-        </div>
-
-        <div class="agregar mt-3">
-            <div class="container p-0 text-center more-btn text-secondary mb-2 shadow border" data-js="new-btn ">
-                <!-- BOTON AGREGAR CLIENTE-->
-                <button onclick="window.location.href='/nuevoCliente' " type="button " class=" btn agregar p-3 text-center more-btn text-secondary w-100 " data-js="new-btn"><i class="bi-plus-lg d-inline-block p-1 px-2 bg-dark text-white rounded-1 "></i> <span class="fw-bold"> Nuevo Cliente </span></button>
-            </div>
-        </div>
-
-        <div class="clientesLista">
-            <div class="campania p-0 mb-3 border">
-                <div class="row g-2 p-0">
-                    <div class="col-sm-3">
-                        <!-- NOMBRE Y APELLIDO -->
-                        <p class="mb-0 fw-bold">Nombre</p>
-                        <p class=""> nombre del cliente</p>
-                        <p class="mb-0 fw-bold ">Apellido</p>
-                        <p> Apellido del cliente</p>
-                    </div>
-                    <div class="col-sm-3 ">
-                        <!-- CUIL Y RAZON -->
-                        <p class="mb-0 fw-bold ">Cuil/Cuit</p>
-                        <p> Aca va el cuil del cliente</p>
-                        <p class="mb-0 fw-bold ">Razón Social</p>
-                        <p> razon social del cliente</p>
-                    </div>
-                    <div class="col-sm-3">
-                        <!-- TELEFONO E IMAL -->
-                        <p class="mb-0 fw-bold ">Teléfono</p>
-                        <p> Telefono del cliente </p>
-                        <p class="mb-0 fw-bold ">Email</p>
-                        <p> Email del cliente</p>
-                    </div>
-                    <div class="col-sm-3 d-flex justify-content-end align-items-end">
-                        <!--FIXME: ID HARCODEADA-->
-
-                        <button onclick="window.location.href='/editarCliente/1' " type="button " class="botonlindo" data-js="button" style="max-width:50px "><i class="bi-pencil-square h2 p-0"></i></button></button>
-                        <!-- EDITAR CLIENTE -->
-
-                        <button type="button " data-js="button " class="botonlindo" style="max-width:50px; ">
-                                <i class="bi-trash-fill h2 p-0"></i>  <!-- ELIMINAR CLIENTE -->
+                <div class="row justify-content-end">
+                    <button onclick="window.location.href='/' " type="button" class="cliente btn btn-primary bi-people-fill p-2 col-md-auto text-center list-wrapper">
+                        <span class="ms-2">Campañas</span>
                     </button>
-                    </div>
                 </div>
             </div>
         </div>
 
-
-        <div class="verMas mb-1 mt-1 shadow border p-0">
-            <button onclick="" type="button " class=" btn agregar text-center more-btn text-secondary w-100 " data-js="new-btn ">
-                        <i class="bi-caret-down-fill me-3 rounded-2 "></i>
+        <div class="container">
+            <!-- BOTON AGREGAR CLIENTE-->
+            <div class="agregar mt-3">
+                <div class="container text-center more-btn text-secondary mb-2 shadow border" data-js="new-btn ">
+                    <button onclick="window.location.href='/nuevoCliente' " type="button " class=" btn agregar p-3 text-center more-btn text-secondary w-100 " data-js="new-btn">
+                        <i class="bi-plus-lg d-inline-block p-1 px-2 bg-dark text-white rounded-1 "></i> <span class="fw-bold"> Nuevo Cliente </span>
                     </button>
-        </div>
+                </div>
+            </div>
 
+            <!-- ClientesList -->
+            <div class="clientesLista py-3">
+                <div class="campania p-3 mb-3 border">
+                    <div class="row g-2">
+                        <div class="col-sm-3 p-2 ps-4">
+                            <!-- NOMBRE Y APELLIDO -->
+                            <p class="mb-0 fw-bold">Nombre</p>
+                            <p class=""> nombre del cliente</p>
+                            <p class="mb-0 fw-bold ">Apellido</p>
+                            <p> Apellido del cliente</p>
+                        </div>
+                        <div class="col-sm-3 p-2">
+                            <!-- CUIL Y RAZON -->
+                            <p class="mb-0 fw-bold ">Cuil/Cuit</p>
+                            <p> Aca va el cuil del cliente</p>
+                            <p class="mb-0 fw-bold ">Razón Social</p>
+                            <p> razon social del cliente</p>
+                        </div>
+                        <div class="col-sm-3 p-2">
+                            <!-- TELEFONO E IMAL -->
+                            <p class="mb-0 fw-bold ">Teléfono</p>
+                            <p> Telefono del cliente </p>
+                            <p class="mb-0 fw-bold ">Email</p>
+                            <p> Email del cliente</p>
+                        </div>
+                        <div class="col-sm-3 d-flex justify-content-end align-items-end">
+                            <!-- EDITAR CLIENTE --><!--FIXME: ID HARCODEADA-->
+                            <button onclick="window.location.href='/editarCliente/1' " type="button " class="botonlindo mx-2" data-js="button" style="max-width:50px ">
+                                <i class="bi-pencil-square h2 p-0"></i>
+                            </button>
+                            <!-- ELIMINAR CLIENTE -->
+                            <button type="button" data-js="button" class="botonlindo mx-2" style="max-width:50px; ">
+                                <i class="bi-trash-fill h2 p-0"></i> 
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ver mas -->
+            <div class="verMas mb-1 mt-1 shadow border">
+                <button onclick="" type="button" class=" btn agregar text-center more-btn text-secondary w-100 p-3" data-js="new-btn ">
+                    <i class="bi-caret-down-fill me-3 rounded-2 "></i>
+                </button>
+            </div>
+        </div>
     </div>
 </body>
 
