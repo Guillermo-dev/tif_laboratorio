@@ -93,21 +93,80 @@ class Campania implements JsonSerializable {
         return get_object_vars($this);
     }
 
+    public static function updateEstado($fecha_inicio): string {
+        if (date('o-m-d') == $fecha_inicio) {
+            return 'ejecucion';
+        } else if (date('o-m-d') < $fecha_inicio) {
+            return 'creada';
+        } else
+            return 'finalizada';
+    }
+
     /**************************** Metodos BD ****************************/
 
     public static function getCampanias(): array {
         $database = Connection::getDatabase();
 
         $campanias = [];
-        $campanias = $database->select('campanias', [
-            'campania_id',
-            'nombre',
-            'texto_SMS',
-            'cantidad_mensajes',
-            'estado',
-            'fecha_inicio',
-            'cliente_id'
-        ]);
+        $campanias = $database->select(
+            'campanias',
+            [
+                'campania_id',
+                'nombre',
+                'texto_SMS',
+                'cantidad_mensajes',
+                'estado',
+                'fecha_inicio',
+                'cliente_id'
+            ],
+            [
+                "ORDER" => 'fecha_inicio'
+            ]
+        );
+
+        if ($campanias != []) {
+            foreach ($campanias as $campania) {
+                if (date('o-m-d') === $campania["fecha_inicio"]) {
+                    $campania['estado'] = 'ejecucion';
+                } else if (date('o-m-d') < $campania["fecha_inicio"]) {
+                    $campania['estado'] = 'creada';
+                } else {
+                    $campania['estado'] = 'finalizada';
+                }
+            }
+        }
+
+        if (isset($database->error))
+            throw new Exception($database->error);
+
+        return $campanias;
+    }
+
+    public static function getCampaniasSearch(string $search): array {
+        $database = Connection::getDatabase();
+
+        $campanias = [];
+        $campanias = $database->select(
+            'campanias',
+            [
+                'campania_id',
+                'nombre',
+                'texto_SMS',
+                'cantidad_mensajes',
+                'estado',
+                'fecha_inicio',
+                'cliente_id'
+            ],
+            [
+                "ORDER" => 'fecha_inicio'
+            ],
+            [
+                'OR' => [
+                    'nombre[~]' => $search,
+                    'fecha_inicio[~]' => $search
+                ]
+            ]
+        );
 
         if (isset($database->error))
             throw new Exception($database->error);
@@ -152,35 +211,9 @@ class Campania implements JsonSerializable {
         return $campania;
     }
 
-    public static function getCampaniasSearch(string $search): array {
-        $database = Connection::getDatabase();
-
-        $campanias = [];
-        $campanias = $database->select('campanias', [
-            'campania_id',
-            'nombre',
-            'texto_SMS',
-            'cantidad_mensajes',
-            'estado',
-            'fecha_inicio',
-            'cliente_id'
-        ], [
-            'OR' => [
-                'nombre[~]' => $search,
-                'fecha_inicio[~]' => $search
-            ]
-        ]);
-
-        if (isset($database->error))
-            throw new Exception($database->error);
-
-        return $campanias;
-    }
-
     public static function createCampania(Campania $campania): void {
         $database = Connection::getDatabase();
 
-        //TODO: estad
         $database->insert('campanias', [
             'nombre' => $campania->getNombre(),
             'texto_SMS' => $campania->getTextoSMS(),

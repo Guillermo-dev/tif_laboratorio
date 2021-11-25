@@ -69,6 +69,12 @@ class Localidad implements JsonSerializable {
             'pais',
             'provincia',
             'ciudad'
+        ], [
+            "ORDER" => [
+                'pais',
+                'provincia',
+                'ciudad'
+            ]
         ]);
 
         if (isset($database->error))

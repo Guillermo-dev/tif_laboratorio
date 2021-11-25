@@ -105,6 +105,11 @@ class Cliente implements JsonSerializable {
             'apellido',
             'telefono',
             'email'
+        ], [
+            "ORDER" => [
+                'apellido',
+                'nombre'
+            ]
         ]);
 
         if (isset($database->error))
@@ -125,7 +130,12 @@ class Cliente implements JsonSerializable {
             'apellido',
             'telefono',
             'email'
-        ],[
+        ], [
+            "ORDER" => [
+                'apellido',
+                'nombre'
+            ]
+        ], [
             'OR' => [
                 'nombre[~]' => $search,
                 'apellido[~]' => $search,
@@ -265,7 +275,7 @@ class Cliente implements JsonSerializable {
 
         if (isset($database->error))
             throw new Exception($database->error);
-        
+
         $cliente->setId($database->id());
     }
 
