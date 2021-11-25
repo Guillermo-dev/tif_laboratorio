@@ -21,7 +21,7 @@ clienteForm.onsubmit = function (event) {
             return false;
         }
 
-        fetch(`/src/clientes.json?cuil_cuit=${clienteForm['cuil_cuit'].value}`)
+        fetch(`/api/clientes?cuil_cuit=${clienteForm['cuil_cuit'].value}`)
             .then(httpResp => httpResp.json())
             .then(response => {
                 if (response.status === "success") {
@@ -83,6 +83,11 @@ campaniaForm.onsubmit = function (event) {
             return false;
         }
 
+        if(campaniaForm['text_SMS'].value.length >= 160){
+            window.iziToast.warning({message: 'El mensaje debe ser de menos de 160 caracteres'});
+            return false;
+        }
+
         const data = {
             nombre: campaniaForm['nombre'].value,
             cantidadMensajes: campaniaForm['cantidad_mensajes'].value,
@@ -99,7 +104,7 @@ campaniaForm.onsubmit = function (event) {
             body: JSON.stringify(data)
         }).then(httpResp => httpResp.json()).then(response => {
             if (response.status === 'success') {
-                window.iziToast.success({message: 'El cliente se creo con exito'});
+                window.iziToast.success({message: 'La campaña se creo con exito'});
                 campaniaForm.reset();
             } else {
                 window.iziToast.error({message: response.error});

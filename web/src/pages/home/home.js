@@ -20,7 +20,7 @@ buscadorForm.onsubmit = function () {
 
 moreButton.onclick = procesarCampanias;
 
-let offset = 2;
+let offset = 5;
 let bufferPointer = 0;
 let campaniasBuffer = [];
 
@@ -31,7 +31,7 @@ function fetchCampanias() {
         query = `?search=${buscadorForm['search'].value}`
     }
 
-    fetch(`/src/campanias.json${query}`)
+    fetch(`/api/campanias${query}`)
         .then(httpResp => httpResp.json())
         .then(response => {
             if (response.status === 'success') {
@@ -43,11 +43,11 @@ function fetchCampanias() {
 
                 procesarCampanias();
             } else {
-                offset.iziToast.error({message: 'Error al obtener las campañas'});
+                window.iziToast.error({message: 'Error al obtener las campañas'});
             }
         })
         .catch(reason => {
-            offset.iziToast.error({message: reason.toString()});
+            window.iziToast.error({message: reason.toString()});
         });
 }
 
@@ -91,14 +91,14 @@ function createCampania(campania) {
                     .then(httpResp => httpResp.json())
                     .then(response => {
                         if (response.status === 'success') {
-                            offset.iziToast.success({message: 'La campaña se eliminó con éxito!'});
+                            window.iziToast.success({message: 'La campaña se eliminó con éxito!'});
                             element.remove();
                         } else {
-                            offset.iziToast.error({message: 'Error al eliminar la campaña'});
+                            window.iziToast.error({message: 'Error al eliminar la campaña'});
                         }
                     })
                     .catch(reason => {
-                        offset.iziToast.error({message: reason.toString()});
+                        window.iziToast.error({message: reason.toString()});
                     });
             }
         });

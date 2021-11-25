@@ -24,11 +24,11 @@
     border-color: #3d1746;
 }
 
-.campania {
+.cliente {
     box-shadow: 0 4px 4px 1px #18363d33;
 }
 
-.campania button.botonlindo {
+.cliente button.botonlindo {
     text-align: center;
     background-color: transparent;
     border: none;

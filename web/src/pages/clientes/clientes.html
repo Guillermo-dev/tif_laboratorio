@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/src/pages/clientes/">
     <link type="text/css" rel="stylesheet" href="clientes.css">
+    <script type="module" src="clientes.js"></script>
     <title>Danna Fox</title>
 </head>
 <body class="p-1">
@@ -15,10 +16,12 @@
         <div class="row g-2 justify-content-between">
             <div class="col-md-auto flex-grow-0">
                 <div class="input-group">
-                    <label>
-                        <input type="text" class="form-control p-2" placeholder="Buscar por cuil/cuit" name="search" autocomplete="off">
-                    </label>
-                    <button type="submit" name="submitSearchBtn" class="lupa p-2 px-3 btn bi-search text-white"></button>
+                    <form id="Buscador">
+                        <label>
+                            <input type="text" class="form-control p-2" placeholder="Buscar por cuil/cuit" name="search" autocomplete="off">
+                        </label>
+                        <button type="submit" name="submitSearchBtn" class="lupa p-2 px-3 btn bi-search text-white"></button>
+                    </fomr>
                 </div>
             </div>
             <div class="col-md-auto flex-grow-0">
@@ -40,50 +43,53 @@
             </div>
         </div>
         <!-- ClientesList -->
-        <div class="clientesLista py-3">
-            <div class="campania p-3 mb-3 border">
-                <div class="row g-2">
-                    <div class="col-sm-3 p-2 ps-4">
-                        <!-- NOMBRE Y APELLIDO -->
-                        <p class="mb-0 fw-bold">Nombre</p>
-                        <p class=""> nombre del cliente</p>
-                        <p class="mb-0 fw-bold ">Apellido</p>
-                        <p> Apellido del cliente</p>
-                    </div>
-                    <div class="col-sm-3 p-2">
-                        <!-- CUIL Y RAZON -->
-                        <p class="mb-0 fw-bold ">Cuil/Cuit</p>
-                        <p> Aca va el cuil del cliente</p>
-                        <p class="mb-0 fw-bold ">Razón Social</p>
-                        <p> razon social del cliente</p>
-                    </div>
-                    <div class="col-sm-3 p-2">
-                        <!-- TELEFONO E IMAL -->
-                        <p class="mb-0 fw-bold ">Teléfono</p>
-                        <p> Telefono del cliente </p>
-                        <p class="mb-0 fw-bold ">Email</p>
-                        <p> Email del cliente</p>
-                    </div>
-                    <div class="col-sm-3 d-flex justify-content-end align-items-end">
-                        <!-- EDITAR CLIENTE --><!--FIXME: ID HARCODEADA-->
-                        <button onclick="window.location.href='/editarCliente/1' " type="button" class="botonlindo mx-2" data-js="button" style="max-width:50px ">
-                            <i class="bi-pencil-square h2 p-0"></i>
-                        </button>
-                        <!-- ELIMINAR CLIENTE -->
-                        <button type="button" data-js="button" class="botonlindo mx-2" style="max-width:50px;">
-                            <i class="bi-trash-fill h2 p-0"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <div id="ClientesLista" class="py-3">
+            <!-- Carga dinamica -->
         </div>
         <!-- Ver mas -->
         <div class="mb-1 mt-1 shadow border">
-            <button onclick="" type="button" class=" btn agregar text-center more-btn text-secondary w-100" data-js="new-btn ">
+            <button id="MoreButton" onclick="" type="button" class=" btn agregar text-center more-btn text-secondary w-100" data-js="new-btn ">
                 <i class="bi-caret-down-fill"></i>
             </button>
         </div>
     </div>
 </div>
+    <template id="ClienteTemplate">
+        <div class="cliente p-3 mb-3 border">
+            <div class="row g-2">
+                <div class="col-sm-3 p-2 ps-4">
+                    <!-- NOMBRE Y APELLIDO -->
+                    <p class="mb-0 fw-bold">Nombre</p>
+                    <p data-js="data"></p>
+                    <p class="mb-0 fw-bold ">Apellido</p>
+                    <p data-js="data"></p>
+                </div>
+                <div class="col-sm-3 p-2">
+                    <!-- CUIL Y RAZON -->
+                    <p class="mb-0 fw-bold ">Cuil/Cuit</p>
+                    <p data-js="data"></p>
+                    <p class="mb-0 fw-bold ">Razón Social</p>
+                    <p data-js="data"></p>
+                </div>
+                <div class="col-sm-3 p-2">
+                    <!-- TELEFONO E IMAL -->
+                    <p class="mb-0 fw-bold ">Teléfono</p>
+                    <p data-js="data"></p>
+                    <p class="mb-0 fw-bold ">Email</p>
+                    <p data-js="data"></p>
+                </div>
+                <div class="col-sm-3 d-flex justify-content-end align-items-end">
+                <!-- EDITAR CLIENTE -->
+                <button type="button" class="botonlindo mx-2" data-js="button" style="max-width:50px ">
+                    <i class="bi-pencil-square h2 p-0"></i>
+                </button>
+                <!-- ELIMINAR CLIENTE -->
+                <button type="button" data-js="button" class="botonlindo mx-2" style="max-width:50px;">
+                    <i class="bi-trash-fill h2 p-0"></i>
+                </button>
+                </div>
+            </div>
+        </div>
+    </template>
 </body>
 </html>
