@@ -19,8 +19,8 @@ if (isset($router)) {
     $router->get('/clientes', 'api\Clientes@getClientes');
     $router->get('/clientes/(\d+)', 'api\Clientes@getCliente');
     $router->post('clientes', 'api\Cliente@createCliente');
-    $router->put('cliente/(\d+)', 'Cliente@updateCliente');
-    $router->delete('cliente/(\d+)', 'Cliente@deleteCliente');
+    $router->put('clientes/(\d+)', 'Cliente@updateCliente');
+    $router->delete('clientes/(\d+)', 'Cliente@deleteCliente');
 
     $router->set404(function () {
         Response::getResponse()->setError('The end point does not exist', 'NOT FOUND');

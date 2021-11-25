@@ -214,6 +214,43 @@ class Cliente implements JsonSerializable {
         return $cliente;
     }
 
+    public static function getClienteByCuil(int $cuil_cuit): ?Cliente {
+        $database = Connection::getDatabase();
+
+        $clientes = $database->select(
+            'clientes',
+            [
+                'cliente_id',
+                'cuil_cuit',
+                'razon_social',
+                'nombre',
+                'apellido',
+                'telefono',
+                'email'
+            ],
+            [
+                'cuil_cuit' => $cuil_cuit
+            ]
+        );
+
+        $cliente = null;
+        if (!empty($clientes)) {
+            $cliente = new CLiente();
+            $cliente->setId($clientes[0]['cliente_id']);
+            $cliente->setCuilCuit($clientes[0]['cuil_cuit']);
+            $cliente->setRazonSocial($clientes[0]['razon_social']);
+            $cliente->setNombre($clientes[0]['nombre']);
+            $cliente->setApellido($clientes[0]['apellido']);
+            $cliente->setTelefono($clientes[0]['telefono']);
+            $cliente->setEmail($clientes[0]['email']);
+        }
+
+        if (isset($database->error))
+            throw new Exception($database->error);
+
+        return $cliente;
+    }
+
     public static function createCliente(Cliente $cliente): void {
         $database = Connection::getDatabase();
 
