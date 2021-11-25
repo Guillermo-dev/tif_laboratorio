@@ -93,10 +93,10 @@ campaniaForm.onsubmit = function (event) {
 
         const data = {
             nombre: campaniaForm['nombre'].value,
-            cantidadMensajes: campaniaForm['cantidad_mensajes'].value,
-            textSMS: campaniaForm['text_SMS'].value,
-            fechaInicio: campaniaForm['fecha_inicio'].value,
-            clienteId: cliente.cliente_id,
+            cantidad_mensajes: campaniaForm['cantidad_mensajes'].value,
+            text_SMS: campaniaForm['text_SMS'].value,
+            fecha_inicio: campaniaForm['fecha_inicio'].value,
+            cliente_id: cliente.cliente_id,
         }
 
         fetch(`/api/campanias${id}`, {

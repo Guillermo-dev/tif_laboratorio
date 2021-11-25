@@ -7,8 +7,8 @@ const id = url.substring(url.lastIndexOf('/') + 1);
 
 clienteForm.onsubmit = function (event) {
     const data = {
-        cuilCuit: clienteForm['cuil_cuit'].value,
-        razonSocial: clienteForm['razon_social'].value,
+        cuil_cuit: clienteForm['cuil_cuit'].value,
+        razon_social: clienteForm['razon_social'].value,
         nombre: clienteForm['nombre'].value,
         apellido: clienteForm['apellido'].value,
         telefono: clienteForm['telefono'].value,

@@ -54,23 +54,23 @@ abstract class Campanias {
             $campania->setNombre($data->nombre);
         else throw new Exception('Nombre de campaña requerido');
 
-        if (isset($data->textSMS))
-            $campania->setTextoSMS($data->textSMS);
+        if (isset($data->text_SMS))
+            $campania->setTextoSMS($data->text_SMS);
         else throw new Exception('Texto de SMS requerido');
 
-        if (isset($data->cantidadMensajes))
-            $campania->setCantidadMensajes($data->cantidadMensajes);
+        if (isset($data->cantidad_mensajes))
+            $campania->setCantidadMensajes($data->cantidad_mensajes);
         else throw new Exception('Cantidad de mensajes requerido');
 
         //DODO:
-        if(date('y-m-d') == $data->fechaInicio){
+        if(date('y-m-d') == $data->fecha_inicio){
             $campania->setEstado('en ejecucion');
-        }else if (date('y-m-d') < $data->fechaInicio) {
+        }else if (date('y-m-d') < $data->fecha_inicio) {
             $campania->setEstado('creada');
         }else throw new Exception('Fecha invalida');
 
-        if (isset($data->fechaInicio))
-            $campania->setFechaInicio($data->fechaInicio);
+        if (isset($data->fecha_inicio))
+            $campania->setFechaInicio($data->fecha_inicio);
         else throw new Exception('Fecha de inicio requerida');
 
         if (Campania::invalidFecha($campania->getFechaInicio(), $campania->getCantidadMensajes()))
@@ -95,22 +95,22 @@ abstract class Campanias {
         if (isset($data->nombre))
             $campania->setNombre($data->nombre);
 
-        if (isset($data->textSMS))
-            $campania->setTextoSMS($data->textSMS);
+        if (isset($data->text_SMS))
+            $campania->setTextoSMS($data->text_SMS);
 
-        if (isset($data->cantidadMensajes))
-            $campania->setCantidadMensajes($data->cantidadMensajes);
+        if (isset($data->cantidad_mensajes))
+            $campania->setCantidadMensajes($data->cantidad_mensajes);
 
         if (isset($data->estado))
             $campania->setEstado($data->estado);
 
-        if (isset($data->fechaInicio))
-            $campania->setFechaInicio($data->fechaInicio);
+        if (isset($data->fecha_inicio))
+            $campania->setFechaInicio($data->fecha_inicio);
 
         //DODO:
-        if(date('y-m-d') == $data->fechaInicio){
+        if(date('y-m-d') == $data->fecha_inicio){
             $campania->setEstado('en ejecucion');
-        }else if (date('y-m-d') < $data->fechaInicio) {
+        }else if (date('y-m-d') < $data->fecha_inicio) {
             $campania->setEstado('creada');
         }else throw new Exception('Fecha invalida');
 

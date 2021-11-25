@@ -28,12 +28,12 @@ abstract class Clientes {
 
         $cliente = new Cliente();
 
-        if (isset($data->cuilCuit))
-            $cliente->setCuilCuit($data->cuilCuit);
+        if (isset($data->cuil_cuit))
+            $cliente->setCuilCuit($data->cuil_cuit);
         else throw new Exception('Cuil/Cuit de cliente requerido');
 
-        if (isset($data->razonSocial))
-            $cliente->setRazonSocial($data->razonSocial);
+        if (isset($data->razon_social))
+            $cliente->setRazonSocial($data->razon_social);
         else throw new Exception('Razon social de cliente requerida');
 
         if (isset($data->nombre))
@@ -62,11 +62,11 @@ abstract class Clientes {
         if ($cliente == null)
             throw new Exception('El cliente no existe');
         else {
-            if (isset($data->cuilCuit))
-                $cliente->setCuilCuit($data->cuilCuit);
+            if (isset($data->cuil_cuit))
+                $cliente->setCuilCuit($data->cuil_cuit);
 
-            if (isset($data->razonSocial))
-                $cliente->setRazonSocial($data->razonSocial);
+            if (isset($data->razon_social))
+                $cliente->setRazonSocial($data->razon_social);
 
             if (isset($data->nombre))
                 $cliente->setNombre($data->nombre);
