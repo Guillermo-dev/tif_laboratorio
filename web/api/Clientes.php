@@ -17,7 +17,10 @@ abstract class Clientes {
     }
 
     public static function getCliente(int $id): void {
-        response::getResponse()->appendData('cliente', Cliente::getClienteById($id));
+        if (isset($_GET['cuil_cuit']))
+            response::getResponse()->appendData('cliente', Cliente::getClienteByCuil($_GET['cuil_cuit']));
+        else
+            response::getResponse()->appendData('cliente', Cliente::getClienteById($id));
     }
 
     public static function createCliente(): void {
@@ -91,9 +94,9 @@ abstract class Clientes {
 
     public static function deleteCliente(int $id): void {
         $cliente = Cliente::getClienteById($id);
-        if($cliente == null)
+        if ($cliente == null)
             throw new Exception('El cliente no existe');
-            
+
         Cliente::deleteCliente($id);
     }
 }
