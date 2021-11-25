@@ -28,8 +28,8 @@ abstract class Campanias {
     public static function createCampania(): void {
         $data = Request::getBodyAsJson();
 
-        if (isset($data['localidades'])) {
-            $localidadesArr = json_decode($data['localidades']);
+        if (isset($data->localidades)) {
+            $localidadesArr = json_decode($data->localidades);
             $localidadesIds = [];
             foreach ($localidadesArr as $localidadId) {
                 $localidad = Localidad::getLocalidadById($localidadId);
@@ -40,8 +40,8 @@ abstract class Campanias {
             }
         }
 
-        if (isset($data['cliente'])) {
-            $cliente = Cliente::getClienteById($data['cliente']->id);
+        if (isset($data->cliente_id)) {
+            $cliente = Cliente::getClienteById($data->cliente_id);
             if ($cliente != null)
                 $clienteId = $cliente->getId();
             else
@@ -50,27 +50,27 @@ abstract class Campanias {
             throw new Exception('Datos del cliente requerido');
 
         $campania = new Campania();
-        if (isset($data['campania']->nombre))
-            $campania->setNombre($data['campania']->nombre);
+        if (isset($data->nombre))
+            $campania->setNombre($data->nombre);
         else throw new Exception('Nombre de campaña requerido');
 
-        if (isset($data['campania']->textSMS))
-            $campania->setTextoSMS($data['campania']->textSMS);
+        if (isset($data->textSMS))
+            $campania->setTextoSMS($data->textSMS);
         else throw new Exception('Texto de SMS requerido');
 
-        if (isset($data['campania']->cantidadMensajes))
-            $campania->setCantidadMensajes($data['campania']->cantidadMensajes);
+        if (isset($data->cantidadMensajes))
+            $campania->setCantidadMensajes($data->cantidadMensajes);
         else throw new Exception('Cantidad de mensajes requerido');
 
         //DODO:
-        if(date('y-m-d') == $data['campania']->fechaInicio){
+        if(date('y-m-d') == $data->fechaInicio){
             $campania->setEstado('en ejecucion');
-        }else if (date('y-m-d') < $data['campania']->fechaInicio) {
+        }else if (date('y-m-d') < $data->fechaInicio) {
             $campania->setEstado('creada');
         }else throw new Exception('Fecha invalida');
 
-        if (isset($data['campania']->fechaInicio))
-            $campania->setFechaInicio($data['campania']->fechaInicio);
+        if (isset($data->fechaInicio))
+            $campania->setFechaInicio($data->fechaInicio);
         else throw new Exception('Fecha de inicio requerida');
 
         if (Campania::invalidFecha($campania->getFechaInicio(), $campania->getCantidadMensajes()))
@@ -92,33 +92,33 @@ abstract class Campanias {
         if (!$campania)
             throw new Exception('La campania no existe');
 
-        if (isset($data['nombre']))
-            $campania->setNombre($data['nombre']);
+        if (isset($data->nombre))
+            $campania->setNombre($data->nombre);
 
-        if (isset($data['textSMS']))
-            $campania->setTextoSMS($data['textSMS']);
+        if (isset($data->textSMS))
+            $campania->setTextoSMS($data->textSMS);
 
-        if (isset($data['cantidadMensajes']))
-            $campania->setCantidadMensajes($data['cantidadMensajes']);
+        if (isset($data->cantidadMensajes))
+            $campania->setCantidadMensajes($data->cantidadMensajes);
 
-        if (isset($data['estado']))
-            $campania->setEstado($data['estado']);
+        if (isset($data->estado))
+            $campania->setEstado($data->estado);
 
-        if (isset($data['fechaInicio']))
-            $campania->setFechaInicio($data['fechaInicio']);
+        if (isset($data->fechaInicio))
+            $campania->setFechaInicio($data->fechaInicio);
 
         //DODO:
-        if(date('y-m-d') == $data['fechaInicio']){
+        if(date('y-m-d') == $data->fechaInicio){
             $campania->setEstado('en ejecucion');
-        }else if (date('y-m-d') < $data['fechaInicio']) {
+        }else if (date('y-m-d') < $data->fechaInicio) {
             $campania->setEstado('creada');
         }else throw new Exception('Fecha invalida');
 
         if (Campania::invalidFecha($campania->getFechaInicio(), $campania->getCantidadMensajes()))
             throw new Exception('Fecha invalida');
 
-        if (isset($data['localidades'])) {
-            $localidadesArr = json_decode($data['localidades']);
+        if (isset($data->localidades)) {
+            $localidadesArr = json_decode($data->localidades);
             $localidadesIds = [];
             foreach ($localidadesArr as $localidadId) {
                 $localidad = Localidad::getLocalidadById($localidadId);
@@ -129,13 +129,13 @@ abstract class Campanias {
             }
         }
 
-        if (isset($data['cliente_id'])) {
-            $cliente = Cliente::getClienteById($data['cliente_id']);
+        if (isset($data->cliente_id)) {
+            $cliente = Cliente::getClienteById($data->cliente_id);
             if ($cliente != null)
                 $campania->setClienteId($cliente->getId());
         }
 
-        Campania::deleteCampaniasLocalidades($data['cliente_id']);
+        Campania::deleteCampaniasLocalidades($id);
         foreach ($localidadesIds as $localidadId) {
             Campania::createCampaniaLocalida($campania->getId(), $localidadId);
         }

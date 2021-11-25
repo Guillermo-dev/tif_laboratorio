@@ -26,69 +26,61 @@ abstract class Clientes {
     public static function createCliente(): void {
         $data = Request::getBodyAsJson();
 
-        if (!isset($data['cliente']))
-            throw new Exception('Datos del cliente requerido');
-        else {
-            $cliente = new Cliente();
+        $cliente = new Cliente();
 
-            if (isset($data['cliente']->cuilCuit))
-                $cliente->setCuilCuit($data['cliente']->cuilCuit);
-            else throw new Exception('Cuil/Cuit de cliente requerido');
+        if (isset($data->cuilCuit))
+            $cliente->setCuilCuit($data->cuilCuit);
+        else throw new Exception('Cuil/Cuit de cliente requerido');
 
-            if (isset($data['cliente']->razonSocial))
-                $cliente->setRazonSocial($data['cliente']->razonSocial);
-            else throw new Exception('Razon social de cliente requerida');
+        if (isset($data->razonSocial))
+            $cliente->setRazonSocial($data->razonSocial);
+        else throw new Exception('Razon social de cliente requerida');
 
-            if (isset($data['cliente']->nombre))
-                $cliente->setNombre($data['cliente']->nombre);
-            else throw new Exception('Nombre de cliente requerido');
+        if (isset($data->nombre))
+            $cliente->setNombre($data->nombre);
+        else throw new Exception('Nombre de cliente requerido');
 
-            if (isset($data['cliente']->apellido))
-                $cliente->setApellido($data['cliente']->apellido);
-            else throw new Exception('Apellido de cliente requerido');
+        if (isset($data->apellido))
+            $cliente->setApellido($data->apellido);
+        else throw new Exception('Apellido de cliente requerido');
 
-            if (isset($data['cliente']->telefono))
-                $cliente->setTelefono($data['cliente']->telefono);
-            else throw new Exception('Telefono de cliente requerido');
+        if (isset($data->telefono))
+            $cliente->setTelefono($data->telefono);
+        else throw new Exception('Telefono de cliente requerido');
 
-            if (isset($data['cliente']->email))
-                $cliente->setEmail($data['cliente']->email);
-            else throw new Exception('Email de cliente requerido');
+        if (isset($data->email))
+            $cliente->setEmail($data->email);
+        else throw new Exception('Email de cliente requerido');
 
-            Cliente::createCliente($cliente);
-        }
+        Cliente::createCliente($cliente);
     }
 
     public static function updateCliente(int $id): void {
         $data = Request::getBodyAsJson();
 
-        if (!isset($data['cliente']))
-            throw new Exception('Datos del cliente requerido');
+        $cliente = Cliente::getClienteById($id);
+        if ($cliente == null)
+            throw new Exception('El cliente no existe');
         else {
-            $cliente = Cliente::getClienteById($id);
-            if ($cliente == null)
-                throw new Exception('El cliente no existe');
-            else {
-                if (isset($data['cliente']->cuilCuit))
-                    $cliente->setCuilCuit($data['cliente']->cuilCuit);
+            if (isset($data->cuilCuit))
+                $cliente->setCuilCuit($data->cuilCuit);
 
-                if (isset($data['cliente']->razonSocial))
-                    $cliente->setRazonSocial($data['cliente']->razonSocial);
+            if (isset($data->razonSocial))
+                $cliente->setRazonSocial($data->razonSocial);
 
-                if (isset($data['cliente']->nombre))
-                    $cliente->setNombre($data['cliente']->nombre);
+            if (isset($data->nombre))
+                $cliente->setNombre($data->nombre);
 
-                if (isset($data['cliente']->apellido))
-                    $cliente->setApellido($data['cliente']->apellido);
+            if (isset($data->apellido))
+                $cliente->setApellido($data->apellido);
 
-                if (isset($data['cliente']->telefono))
-                    $cliente->setTelefono($data['cliente']->telefono);
+            if (isset($data->telefono))
+                $cliente->setTelefono($data->telefono);
 
-                if (isset($data['cliente']->email))
-                    $cliente->setEmail($data['cliente']->email);
+            if (isset($data->email))
+                $cliente->setEmail($data->email);
 
-                Cliente::updateCliente($cliente);
-            }
+            Cliente::updateCliente($cliente);
         }
     }
 
