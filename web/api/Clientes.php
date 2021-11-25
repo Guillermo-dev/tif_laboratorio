@@ -11,9 +11,9 @@ abstract class Clientes {
 
     public static function getClientes(): void {
         if (isset($_GET['search']))
-            Response::getResponse()->appendData('campanias', Cliente::getClientesSearch($_GET['search']));
+            Response::getResponse()->appendData('clientes', Cliente::getClientesSearch($_GET['search']));
         else
-            Response::getResponse()->appendData('campanias', Cliente::getClientes());
+            Response::getResponse()->appendData('clientes', Cliente::getClientes());
     }
 
     public static function getCliente(int $id): void {

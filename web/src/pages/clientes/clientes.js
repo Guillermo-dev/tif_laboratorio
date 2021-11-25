@@ -26,7 +26,6 @@ let clientesBuffer = [];
 
 function fetchClientes() {
     let query = '';
-
     if (buscadorForm['search'].value.length > 0) {
         query = `?search=${buscadorForm['search'].value}`
     }
@@ -119,4 +118,4 @@ function procesarClientes() {
     }
 }
 
-function fetchClientes();
+fetchClientes();
