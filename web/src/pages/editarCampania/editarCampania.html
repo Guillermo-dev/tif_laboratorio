@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,71 +8,70 @@
     <link type="text/css" rel="stylesheet" href="nuevaCampania.css">
     <title>Danna Fox</title>
 </head>
-
-<body>
-    <div class="contenedor pb-4">
-        <!-- Nav -->
-        <div class="buscador row">
-            <div class="col-md">
-                <div class="row g-0 justify-content-end">
-                    <button onclick="window.location.href='/' " type="button" class="cliente btn btn-primary bi-people-fill p-2 col-md-auto text-center list-wrapper">
-                        <span class="ms-2">Volver</span>
-                    </button>
-                </div>
+<body class="p-1">
+<div class="shadow mt-2 mx-3">
+    <!-- Nav -->
+    <div class="buscador rounded-top p-3 px-4">
+        <div class="row g-2 justify-content-end">
+            <div class="col-md-auto flex-grow-0">
+                <button onclick="window.location.href='/';" type="button" class="cliente btn btn-primary p-2 text-center">
+                    <i class="bi-arrow-left"></i>
+                    <span class="ms-2">Volver</span>
+                </button>
             </div>
-        </div>
-        <!-- Form -->
-        <div class="container p-0 mt-3 rounded-top rounded contenedor font-weight-bold">
-            <div class="encabezadoDoc text-center" id="encabezadoDoc">
-                <h3 class="bg-secondary bg-opacity-25">Editar campaña</h3>
-            </div>
-            <form class="p-4" data-js="form">
-                <div class="row g-3 mb-3">
-                    <div class="col-sm form-group fw-bold ">
-                        <label for="cliente">Cliente<span class="text-danger">*</span></label>
-                        <input type="text " class="form-control " id="cuil" placeholder="Ingrese el cuil/cuit del cliente asociado">
-                    </div>
-                    <div class ="col-sm">
-                        <div class="mb-3">
-                            <label class="fw-bold" for="titulo">Nombre de la campaña<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="Nombre" required id="Nombre" placeholder="Ingrese el nombre de la campaña">
-                        </div>
-                        <div class="mb-3">
-                            <label class="fw-bold" for="fecha">Fecha de inicio<span class="text-danger">*</span></label>
-                            <input type="date" class="form-control" name="fecha" id="numero" required placeholder="Ingrese la fecha de activación">
-                        </div>
-                        <div class="mb-3">
-                            <div class="form-group fw-bold ">
-                                <label for="campaña ">Cantidad de mensajes<span class="text-danger">*</span></label>
-                                <select class="form-control form-control">
-                                    <option>7000</option>
-                                    <option>14000</option>
-                                    <option>21000</option>
-                                    <option>28000</option>
-                                    <option>35000</option>
-                                    <option>42000</option>
-                                    <option>56000</option>
-                                    <option>63000</option>
-                                    <option>70000</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mb-3"> 
-                            <div class="form-groupfw-bold">
-                                <label class="fw-bold" for="mensaje ">Mensaje<span class="text-danger">*</span></label>
-                                <textarea class="form-control" id="mensaje " placeholder="Ingrese el nombre de la campaña, solo 160 caracteres "></textarea>
-                            </div>
-                        </div>
-                        <span class="text-danger fw-bold">*Campos Obligatorios</span>
-                                <!-- FIXME:Controlar la cantidad de caracteres -->
-                        <div class="text-end mt-2">
-                            <button type="submit " class="btn btn-secondary">Agregar</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
-</body>
 
+    <div class="text-center p-3 bg-secondary bg-opacity-25 mx-5 mt-3 mb-5">
+        <h3 class="mb-0">Editar campaña</h3>
+    </div>
+    <div class="container p-0 mt-3 rounded-top rounded contenedor font-weight-bold">
+        <form class="p-4" data-js="form">
+            <div class="row g-3 mb-3">
+                <div class="col-sm form-group fw-bold ">
+                    <label >Cliente<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="cuil" placeholder="Ingrese el cuil/cuit del cliente asociado">
+                </div>
+                <div class="col-sm">
+                    <div class="mb-3">
+                        <label class="fw-bold">Nombre de la campaña<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="Nombre" required id="Nombre" placeholder="Ingrese el nombre de la campaña">
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Fecha de inicio<span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" name="fecha" id="numero" required placeholder="Ingrese la fecha de activación">
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-group fw-bold ">
+                            <label>Cantidad de mensajes<span class="text-danger">*</span></label>
+                            <select class="form-control form-control">
+                                <option>7000</option>
+                                <option>14000</option>
+                                <option>21000</option>
+                                <option>28000</option>
+                                <option>35000</option>
+                                <option>42000</option>
+                                <option>56000</option>
+                                <option>63000</option>
+                                <option>70000</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-groupfw-bold">
+                            <label class="fw-bold" for="mensaje ">Mensaje<span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="mensaje " placeholder="Ingrese el nombre de la campaña, solo 160 caracteres "></textarea>
+                        </div>
+                    </div>
+                    <span class="text-danger fw-bold">*Campos Obligatorios</span>
+                    <!-- FIXME:Controlar la cantidad de caracteres -->
+                    <div class="text-end mt-2">
+                        <button type="submit" class="btn btn-secondary">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
 </html>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,65 +8,64 @@
     <link type="text/css" rel="stylesheet" href="editarCliente.css">
     <title>Danna Fox</title>
 </head>
-
-<body>
-    <div class="contenedor pb-4">
-        <!-- Nav -->
-        <div class="buscador row">
-            <div class="col-md">
-                <div class="row g-0 justify-content-end">
-                    <button onclick="window.location.href='/clientes' " type="button" class="cliente btn btn-primary bi-people-fill p-2 col-md-auto text-center list-wrapper">
-                        <span class="ms-2">Volver</span>
-                    </button>
-                </div>
+<body class="p-1">
+<div class="shadow mt-2 mx-3">
+    <!-- Nav -->
+    <div class="buscador rounded-top p-3 px-4">
+        <div class="row g-2 justify-content-end">
+            <div class="col-md-auto flex-grow-0">
+                <button onclick="window.location.href='/clientes';" type="button" class="cliente btn btn-primary p-2 text-center">
+                    <i class="bi-arrow-left"></i>
+                    <span class="ms-2">Volver</span>
+                </button>
             </div>
-        </div>
-        <!-- Form -->
-        <div class="container p-0 mt-3 rounded-top rounded contenedor font-weight-bold">
-            <div class="encabezadoDoc text-center" id="encabezadoDoc">
-                <h3 class="bg-secondary bg-opacity-25">Editar Cliente</h3>
-            </div>
-            <form class="p-4">
-                <div class="form-group mb-3">
-                    <label class="fw-bold" for="campaña">Cuil/Cuit<span class="text-danger">*</span></label>
-                    <input type="text " class="form-control " id="cuil" placeholder="Ingrese el cuil o cuit del cliente">
-                </div>
-                <div class="row g-3">
-                    <div class="col-sm mb-3">
-                        <label class="fw-bold" for="campaña">Nombre<span class="text-danger">*</span></label>
-                        <input type="text " class="form-control " id="nombre " placeholder="Ingrese el nombre del cliente">
-                    </div>
-                    <div class="col-sm">
-                        <label class="fw-bold" for="campaña">Apellido<span class="text-danger">*</span></label>
-                        <input type="text " class="form-control " id="nombre " placeholder="Ingrese el apellido del cliente">
-                    </div>
-                </div>
-                <div class="form-group mb-3">
-                    <label class ="fw-bold" for="campaña">Razón Social<span class="text-danger">*</span></label>
-                    <select class="form-control form-control">
-                        <option>Seleccione una opción</option>
-                        <option>Monotributista</option>
-                        <option>Consumidor Final</option>
-                        <option>Responsable inscripto</option>
-                    </select>
-                </div>
-                <div class="row g-3 mb-3">
-                    <div class="col-sm">
-                        <label class="fw-bold" for="campaña">Teléfono<span class="text-danger">*</span></label>
-                        <input type="text " class="form-control " id="nombre " placeholder="Ingrese el teléfono del cliente">
-                    </div>
-                    <div class="col-sm">
-                        <label class=" fw-bold" for="campaña">E-mail<span class="text-danger">*</span></label>
-                        <input type="email" class="form-control " id="nombre " placeholder="Ingrese el email del cliente">
-                    </div>
-                </div>
-                <span class="text-danger fw-bold">*Campos Obligatorios</span>
-                <div class="text-end mt-2">
-                    <button type="submit " class="btn btn-secondary">Agregar</button>
-                </div>
-            </form>
         </div>
     </div>
+    <!-- Form -->
+    <div class="text-center p-3 bg-secondary bg-opacity-25 mx-5 mt-3 mb-5">
+        <h3 class="mb-0">Editar cliente</h3>
+    </div>
+    <div class="container p-0 mt-3 rounded-top rounded contenedor font-weight-bold">
+        <form class="p-4">
+            <div class="form-group mb-4">
+                <label class="fw-bold">Cuil/Cuit<span class="text-danger">*</span></label>
+                <input type="text" class="form-control p-2" id="cuil" placeholder="Ingrese el cuil o cuit del cliente">
+            </div>
+            <div class="row g-4 mb-4">
+                <div class="col-sm">
+                    <label class="fw-bold">Nombre<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control p-2" placeholder="Ingrese el nombre del cliente">
+                </div>
+                <div class="col-sm">
+                    <label class="fw-bold">Apellido<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control p-2" placeholder="Ingrese el apellido del cliente">
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <label class="fw-bold">Razón Social<span class="text-danger">*</span></label>
+                <select class="form-control form-control p-2">
+                    <option>Seleccione una opción</option>
+                    <option>Monotributista</option>
+                    <option>Consumidor Final</option>
+                    <option>Responsable inscripto</option>
+                </select>
+            </div>
+            <div class="row g-4 mb-4">
+                <div class="col-sm">
+                    <label class="fw-bold">Teléfono<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control p-2" placeholder="Ingrese el teléfono del cliente">
+                </div>
+                <div class="col-sm">
+                    <label class=" fw-bold">E-mail<span class="text-danger">*</span></label>
+                    <input type="email" class="form-control p-2" placeholder="Ingrese el email del cliente">
+                </div>
+            </div>
+            <span class="text-danger fw-bold">*Campos Obligatorios</span>
+            <div class="text-end mt-2">
+                <button type="submit" class="btn btn-secondary">Agregar</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
-
 </html>

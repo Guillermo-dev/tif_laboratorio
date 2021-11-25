@@ -2,11 +2,6 @@
 
 .buscador {
     background-color: #5b2a67;
-    display: flex;
-    padding: 10px 10px 10px 30px;
-    width: auto;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
 }
 
 .buscador>div>input {
@@ -20,7 +15,7 @@
     color: white;
 }
 
-.buscador>div>input.form-control::focus {
+.buscador>div>input.form-control:focus {
     outline: none !important;
     background-color: #3d1746 !important;
 }
@@ -30,18 +25,3 @@
     background-color: #3d1746;
     border-color: #3d1746;
 }
-
-.contenedor {
-    overflow: hidden;
-    box-shadow: 0 4px 4px 1px #18363d33;
-    width: auto;
-    height: auto;
-}
-
-
-/*
-.form>input {
-    border-color: #3d1746;
-}
-Quiero los bordes de los input de color violeta
-*/
