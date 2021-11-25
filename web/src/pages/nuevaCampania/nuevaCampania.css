@@ -14,16 +14,6 @@
     border-color: #3d1746;
 }
 
-.campania {
-    box-shadow: 0 4px 4px 1px #18363d33;
-}
-
-.campania button.botonlindo {
-    text-align: center;
-    background-color: transparent;
-    border: none;
-}
-
 #ClienteForm:not(.cliente-info) .cliente-info {
     display: none !important;
 }

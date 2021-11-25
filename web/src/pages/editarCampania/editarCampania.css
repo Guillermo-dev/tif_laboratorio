@@ -4,24 +4,12 @@
     background-color: #5b2a67;
 }
 
-.buscador>div>input {
-    background-color: #3d1746;
-    border-color: #3d1746;
-    color: rgb(0, 0, 0);
-    width: auto;
-}
-
-.buscador>div>input::placeholder {
-    color: white;
-}
-
-.buscador>div>input.form-control:focus {
+.buscador>input.form-control:focus {
     outline: none !important;
     background-color: #3d1746 !important;
 }
 
-.buscador>div>button {
-    width: 50px;
+.buscador button.cliente {
     background-color: #3d1746;
     border-color: #3d1746;
 }
