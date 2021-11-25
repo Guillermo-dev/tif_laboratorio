@@ -21,7 +21,7 @@ clienteForm.onsubmit = function (event) {
             return false;
         }
 
-        fetch(`/api/clientes?cuil_cuit=${clienteForm['cuil_cuit'].value}`)
+        fetch(`/api/clientes/?cuil_cuit=${clienteForm['cuil_cuit'].value}`)
             .then(httpResp => httpResp.json())
             .then(response => {
                 if (response.status === "success") {

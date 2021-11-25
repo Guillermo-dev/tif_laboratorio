@@ -205,7 +205,7 @@ class Campania implements JsonSerializable {
             'cantidad_mensajes' => $campania->getCantidadMensajes(),
             'estado' => $campania->getEstado(),
             'fecha_inicio' => $campania->getFechaInicio(),
-            'cliente_id' => $campania->getCliente_id
+            'cliente_id' => $campania->getClienteId(),
         ], [
             'campania_id' => $campania->getId()
         ]);

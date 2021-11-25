@@ -12,15 +12,14 @@ abstract class Clientes {
     public static function getClientes(): void {
         if (isset($_GET['search']))
             Response::getResponse()->appendData('clientes', Cliente::getClientesSearch($_GET['search']));
+        else if (isset($_GET['cuil_cuit']))
+            response::getResponse()->appendData('cliente', Cliente::getClienteByCuil($_GET['cuil_cuit']));
         else
             Response::getResponse()->appendData('clientes', Cliente::getClientes());
     }
 
     public static function getCliente(int $id): void {
-        if (isset($_GET['cuil_cuit']))
-            response::getResponse()->appendData('cliente', Cliente::getClienteByCuil($_GET['cuil_cuit']));
-        else
-            response::getResponse()->appendData('cliente', Cliente::getClienteById($id));
+        response::getResponse()->appendData('cliente', Cliente::getClienteById($id));
     }
 
     public static function createCliente(): void {

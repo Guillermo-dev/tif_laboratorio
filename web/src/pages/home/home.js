@@ -31,7 +31,7 @@ function fetchCampanias() {
         query = `?search=${buscadorForm['search'].value}`
     }
 
-    fetch(`/api/campanias${query}`)
+    fetch(`/api/campanias/${query}`)
         .then(httpResp => httpResp.json())
         .then(response => {
             if (response.status === 'success') {

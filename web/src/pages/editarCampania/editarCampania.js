@@ -28,7 +28,7 @@ clienteForm.onsubmit = function (event) {
 }
 
 function fetchCliente() {
-    fetch(`/api/clientes?cuil_cuit=${clienteForm['cuil_cuit'].value}`)
+    fetch(`/api/clientes/?cuil_cuit=${clienteForm['cuil_cuit'].value}`)
         .then(httpResp => httpResp.json())
         .then(response => {
             if (response.status === "success") {
@@ -99,18 +99,19 @@ campaniaForm.onsubmit = function (event) {
             cliente_id: cliente.cliente_id,
         }
 
-        fetch(`/api/campanias${id}`, {
+        fetch(`/api/campanias/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        }).then(httpResp => httpResp.json()).then(response => {
+        })
+        .then(httpResp => httpResp.json())
+        .then(response => {
             if (response.status === 'success') {
-                window.iziToast.success({ message: 'El cliente se actualizo con exito' });
-                campaniaForm.reset();
+                window.iziToast.success({ message: 'La campaña se actualizo con exito' });
             } else {
-                window.iziToast.error({ message: response.error });
+                window.iziToast.error({ message: response.error.error });
             }
         }).catch(reason => {
             window.iziToast.error({ message: reason.toString() });
@@ -122,7 +123,7 @@ campaniaForm.onsubmit = function (event) {
 }
 
 function fetchCampania() {
-    fetch(`/api/campanias${id}`)
+    fetch(`/api/campanias/${id}`)
         .then(httpResp => httpResp.json())
         .then(response => {
             if (response.status === 'success') {
@@ -141,11 +142,11 @@ function fetchCampania() {
 
 function procesarCampania(campania, cliente, localidades) {
     campaniaForm['nombre'].value = campania.nombre;
-    campaniaForm['cantidad_mensajes'].value = campania.cantidad_mensajes;
-    campaniaForm['text_SMS'].value = campania.texto_SMS;
-    campaniaForm['fecha_inicio'].value = campania.fecha_inicio;
+    campaniaForm['cantidad_mensajes'].value = campania.cantidadMensajes;
+    campaniaForm['text_SMS'].value = campania.textoSMS;
+    campaniaForm['fecha_inicio'].value = campania.fechaInicio;
 
-    clienteForm['cuil_cuit'].value = cliente.cuil_cuit;
+    clienteForm['cuil_cuit'].value = cliente.cuilCuit;
     fetchCliente();
 
     localidades.forEach( (localidad) => {

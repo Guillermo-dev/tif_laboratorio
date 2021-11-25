@@ -30,7 +30,7 @@ function fetchClientes() {
         query = `?search=${buscadorForm['search'].value}`
     }
 
-    fetch(`/api/clientes${query}`)
+    fetch(`/api/clientes/${query}`)
         .then(httpResp => httpResp.json())
         .then(response => {
             if (response.status === 'success') {
@@ -65,7 +65,7 @@ function createCliente(cliente) {
 
     data[4].textContent = cliente.telefono;
 
-    data[4].textContent = cliente.email;
+    data[5].textContent = cliente.email;
 
     const buttons = element.querySelectorAll('[data-js="button"]');
 

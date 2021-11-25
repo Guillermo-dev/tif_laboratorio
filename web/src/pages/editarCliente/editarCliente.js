@@ -15,7 +15,7 @@ clienteForm.onsubmit = function (event) {
         email: clienteForm['email'].value
     }
 
-    fetch(`/api/clientes${id}`, {
+    fetch(`/api/clientes/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -24,7 +24,6 @@ clienteForm.onsubmit = function (event) {
     }).then(httpResp => httpResp.json()).then(response => {
         if (response.status === 'success') {
             window.iziToast.success({ message: 'El cliente se actualizo con exito' });
-            clienteForm.reset();
         } else {
             window.iziToast.error({ message: response.error });
         }
@@ -36,7 +35,7 @@ clienteForm.onsubmit = function (event) {
 }
 
 function fecthCliente() {
-    fetch(`/api/clientes${id}`)
+    fetch(`/api/clientes/${id}`)
         .then(httpResp => httpResp.json())
         .then(response => {
             if (response.status === 'success') {
@@ -51,8 +50,8 @@ function fecthCliente() {
 }
 
 function procesarCliente(cliente) {
-    clienteForm['cuil_cuit'].value = cliente.cuil_cuit;
-    clienteForm['razon_social'].value = cliente.razon_social;
+    clienteForm['cuil_cuit'].value = cliente.cuilCuit;
+    clienteForm['razon_social'].value = cliente.razonSocial;
     clienteForm['nombre'].value = cliente.nombre;
     clienteForm['apellido'].value = cliente.apellido;
     clienteForm['telefono'].value = cliente.telefono;
