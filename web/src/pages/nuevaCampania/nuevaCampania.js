@@ -31,7 +31,6 @@ clienteForm.onsubmit = function (event) {
                         procesarCliente(response.data.cliente);
 
                         cliente = response.data.cliente;
-
                     } else {
                         let cuil = clienteForm['cuil_cuit'].value;
 
@@ -76,6 +75,8 @@ function procesarCliente(cliente) {
 
 const campaniaForm = document.getElementById('CampaniaForm');
 
+const dropLocalidades = document.getElementById('DropLocalidades');
+
 campaniaForm.onsubmit = function (event) {
     try {
         if (!cliente) {
@@ -87,13 +88,19 @@ campaniaForm.onsubmit = function (event) {
             window.iziToast.warning({message: 'El mensaje debe ser de menos de 160 caracteres'});
             return false;
         }
-
+        
+        let localidadArr = [];
+        Array.from(campaniaForm['localidad'].selectedOptions).forEach( localidad =>{
+            localidadArr.push(localidad.value);
+        })
+       
         const data = {
             nombre: campaniaForm['nombre'].value,
             cantidad_mensajes: campaniaForm['cantidad_mensajes'].value,
             text_SMS: campaniaForm['text_SMS'].value,
             fecha_inicio: campaniaForm['fecha_inicio'].value,
-            cliente_id: cliente.cliente_id,
+            cliente_id: cliente.id,
+            localidades: localidadArr
         }
 
         fetch(`/api/campanias`, {
@@ -107,7 +114,7 @@ campaniaForm.onsubmit = function (event) {
                 window.iziToast.success({message: 'La campaña se creo con exito'});
                 campaniaForm.reset();
             } else {
-                window.iziToast.error({message: response.error});
+                window.iziToast.error({message: response.error.error});
             }
         }).catch(reason => {
             window.iziToast.error({message: reason.toString()});
@@ -117,3 +124,30 @@ campaniaForm.onsubmit = function (event) {
     }
     return false;
 }
+
+function  createOptions(localidades){
+    localidades.forEach((localidad) => {
+        const option = document.createElement("option");
+        option.value = localidad.localidad_id
+        option.innerText = localidad.pais + ', ' + localidad.provincia + ', ' + localidad.ciudad;
+
+        dropLocalidades.append(option);
+    });
+}
+
+function fetchLocalidades(){
+    fetch('/api/localidades')
+        .then(httpResp => httpResp.json())
+        .then(response => {
+            if (response.status === 'success') {
+                createOptions(response.data.localidades);
+            } else {
+                window.iziToast.error({ message: 'Error al obtener la campaña' });
+            }
+        })
+        .catch(reason => {
+            window.iziToast.error({ message: reason.toString() });
+        });
+}
+
+fetchLocalidades();

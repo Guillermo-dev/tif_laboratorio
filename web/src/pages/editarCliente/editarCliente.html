@@ -30,21 +30,21 @@
         <form class="p-4" id="ClienteForm">
             <div class="form-group mb-4">
                 <label class="fw-bold">Cuil/Cuit<span class="text-danger">*</span></label>
-                <input type="text"  name="cuil_cuit" class="form-control p-2" placeholder="Ingrese el cuil o cuit del cliente">
+                <input type="text"  name="cuil_cuit" class="form-control p-2" placeholder="Ingrese el cuil o cuit del cliente" required>
             </div>
             <div class="row g-4 mb-4">
                 <div class="col-sm">
                     <label class="fw-bold">Nombre<span class="text-danger">*</span></label>
-                    <input type="text" name ="nombre" class="form-control p-2" placeholder="Ingrese el nombre del cliente">
+                    <input type="text" name ="nombre" class="form-control p-2" placeholder="Ingrese el nombre del cliente" required>
                 </div>
                 <div class="col-sm">
                     <label class="fw-bold">Apellido<span class="text-danger">*</span></label>
-                    <input type="text" name="apellido" class="form-control p-2" placeholder="Ingrese el apellido del cliente">
+                    <input type="text" name="apellido" class="form-control p-2" placeholder="Ingrese el apellido del cliente" required>
                 </div>
             </div>
             <div class="form-group mb-4">
                 <label class="fw-bold">Razón Social<span class="text-danger">*</span></label>
-                <select name="razon_social" class="form-control form-control p-2">
+                <select name="razon_social" class="form-control form-control p-2" required>
                     <option>Seleccione una opción</option>
                     <option>Monotributista</option>
                     <option>Consumidor Final</option>
@@ -54,11 +54,11 @@
             <div class="row g-4 mb-4">
                 <div class="col-sm">
                     <label class="fw-bold">Teléfono<span class="text-danger">*</span></label>
-                    <input type="text" name="telefono" class="form-control p-2" placeholder="Ingrese el teléfono del cliente">
+                    <input type="text" name="telefono" class="form-control p-2" placeholder="Ingrese el teléfono del cliente" required>
                 </div>
                 <div class="col-sm">
                     <label class=" fw-bold">E-mail<span class="text-danger">*</span></label>
-                    <input type="email" name="email" class="form-control p-2" placeholder="Ingrese el email del cliente">
+                    <input type="email" name="email" class="form-control p-2" placeholder="Ingrese el email del cliente" required>
                 </div>
             </div>
             <span class="text-danger fw-bold">*Campos Obligatorios</span>

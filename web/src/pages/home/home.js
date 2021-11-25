@@ -94,7 +94,7 @@ function createCampania(campania) {
                             window.iziToast.success({message: 'La campaña se eliminó con éxito!'});
                             element.remove();
                         } else {
-                            window.iziToast.error({message: 'Error al eliminar la campaña'});
+                            window.iziToast.error({message: response.error.error});
                         }
                     })
                     .catch(reason => {

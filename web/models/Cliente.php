@@ -297,6 +297,6 @@ class Cliente implements JsonSerializable {
         ]);
 
         if (isset($database->error))
-            throw new Exception($database->error);
+            throw new Exception($database->error, $database->errorInfo[1]);
     }
 }

@@ -95,7 +95,7 @@ function createCliente(cliente) {
                             window.iziToast.success({message: 'El cliente se eliminó con éxito!'});
                             element.remove();
                         } else {
-                            window.iziToast.error({message: 'Error al eliminar el cliente'});
+                            window.iziToast.error({message: response.error.error});
                         }
                     })
                     .catch(reason => {

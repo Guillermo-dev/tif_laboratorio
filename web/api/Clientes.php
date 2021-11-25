@@ -87,7 +87,14 @@ abstract class Clientes {
         $cliente = Cliente::getClienteById($id);
         if ($cliente == null)
             throw new Exception('El cliente no existe');
-
-        Cliente::deleteCliente($id);
+        try{
+            Cliente::deleteCliente($id);
+        }catch(Exception $e){
+            if($e->getCode() == 1451){
+                throw new Exception('El usuario esta asociado a una campaña, no se puede eliminar');
+            }else{
+                throw new Exception('Error al eliminar el cliente');
+            }
+        }
     }
 }

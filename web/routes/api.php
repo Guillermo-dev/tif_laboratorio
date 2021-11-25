@@ -22,6 +22,8 @@ if (isset($router)) {
     $router->put('/clientes/(\d+)', 'api\Clientes@updateCliente');
     $router->delete('/clientes/(\d+)', 'api\Clientes@deleteCliente');
 
+    $router->get('/localidades', 'api\Localidades@getLocalidades');
+
     $router->set404(function () {
         Response::getResponse()->setStatus('error');
         Response::getResponse()->setError('The end point does not exist', 'NOT FOUND');

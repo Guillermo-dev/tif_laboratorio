@@ -28,11 +28,10 @@ abstract class Campanias {
         $data = Request::getBodyAsJson();
 
         if (isset($data->localidades)) {
-            $localidadesArr = json_decode($data->localidades);
             $localidadesIds = [];
-            foreach ($localidadesArr as $localidadId) {
-                $localidad = Localidad::getLocalidadById($localidadId);
-                if ($localidad)
+            foreach ($data->localidades as $localidadId) {
+                $localidad = Localidad::getLocalidadById(intval($localidadId, 10));
+                if ($localidad != null)
                     $localidadesIds[] = $localidad->getId();
                 else
                     throw new Exception('La localidad no existe');
@@ -61,12 +60,11 @@ abstract class Campanias {
             $campania->setCantidadMensajes($data->cantidad_mensajes);
         else throw new Exception('Cantidad de mensajes requerido');
 
-        //DODO:
-        if(date('y-m-d') == $data->fecha_inicio){
-            $campania->setEstado('en ejecucion');
-        }else if (date('y-m-d') < $data->fecha_inicio) {
+        if (date('o-m-d') == $data->fecha_inicio) {
+            $campania->setEstado('ejecucion');
+        } else if (date('o-m-d') < $data->fecha_inicio) {
             $campania->setEstado('creada');
-        }else throw new Exception('Fecha invalida');
+        } else throw new Exception('Fecha invalida');
 
         if (isset($data->fecha_inicio))
             $campania->setFechaInicio($data->fecha_inicio);
@@ -106,23 +104,20 @@ abstract class Campanias {
         if (isset($data->fecha_inicio))
             $campania->setFechaInicio($data->fecha_inicio);
 
-        //TODO: 
-        /*
-        if(date('y-m-d') == $data->fecha_inicio){
-            $campania->setEstado('en ejecucion');
-        }else if (date('y-m-d') < $data->fecha_inicio) {
+        if (date('o-m-d') == $data->fecha_inicio) {
+            $campania->setEstado('ejecucion');
+        } else if (date('o-m-d') < $data->fecha_inicio) {
             $campania->setEstado('creada');
-        }else throw new Exception('Fecha invalida');*/
+        } else throw new Exception('Fecha invalida');
 
-        if (Campania::invalidFecha($campania->getFechaInicio(), $campania->getCantidadMensajes()))
+        if (Campania::invalidFecha($campania->getFechaInicio(), $campania->getCantidadMensajes(), $campania->getId()))
             throw new Exception('Fecha invalida');
 
         if (isset($data->localidades)) {
-            $localidadesArr = json_decode($data->localidades);
             $localidadesIds = [];
-            foreach ($localidadesArr as $localidadId) {
-                $localidad = Localidad::getLocalidadById($localidadId);
-                if ($localidad)
+            foreach ($data->localidades as $localidadId) {
+                $localidad = Localidad::getLocalidadById(intval($localidadId, 10));
+                if ($localidad != null)
                     $localidadesIds[] = $localidad->getId();
                 else
                     throw new Exception('La localidad no existe');
@@ -131,7 +126,7 @@ abstract class Campanias {
             Campania::deleteCampaniasLocalidades($id);
             foreach ($localidadesIds as $localidadId) {
                 Campania::createCampaniaLocalida($campania->getId(), $localidadId);
-            }    
+            }
         }
 
         if (isset($data->cliente_id)) {

@@ -187,7 +187,7 @@ class Campania implements JsonSerializable {
             'cantidad_mensajes' => $campania->getCantidadMensajes(),
             'estado' => $campania->getEstado(),
             'fecha_inicio' => $campania->getFechaInicio(),
-            'cliente_id' => $campania->getCliente_id
+            'cliente_id' => $campania->getClienteId(),
         ]);
 
         if (isset($database->error))
@@ -227,7 +227,7 @@ class Campania implements JsonSerializable {
             throw new Exception($database->error);
     }
 
-    public static function invalidFecha(string $fecha, string $mensajesNuevos): bool {
+    public static function invalidFecha(string $fecha, string $mensajesNuevos, int $id = 0): bool {
         $database = Connection::getDatabase();
 
         $campanias = $database->select(
@@ -251,18 +251,20 @@ class Campania implements JsonSerializable {
 
         $cantidadMensajes = 0;
         foreach ($campanias as $campania) {
-            $cantidadMensajes += intval($campania['cantidad_mensajes'], 10);
+            if ($campania['campania_id'] != $id) {
+                $cantidadMensajes += intval($campania['cantidad_mensajes'], 10);
+            }
         }
 
-        return $cantidadMensajes + intval($mensajesNuevos) >= 70000;
+        return $cantidadMensajes + intval($mensajesNuevos) > 70000;
     }
 
     public static function createCampaniaLocalida(int $campaniaId, int $localidadId): void {
         $database = Connection::getDatabase();
 
         $database->insert('campanias_localidades', [
-            'campania_id ' => $campaniaId,
-            'localidad_id ' => $localidadId,
+            'campania_id' => $campaniaId,
+            'localidad_id' => $localidadId,
         ]);
 
         if (isset($database->error))
