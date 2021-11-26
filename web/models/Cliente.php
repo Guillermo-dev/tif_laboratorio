@@ -131,15 +131,14 @@ class Cliente implements JsonSerializable {
             'telefono',
             'email'
         ], [
-            "ORDER" => [
-                'apellido',
-                'nombre'
-            ]
-        ], [
             'OR' => [
                 'nombre[~]' => $search,
                 'apellido[~]' => $search,
                 'cuil_cuit[~]' => $search
+            ],
+            "ORDER" => [
+                'apellido',
+                'nombre'
             ]
         ]);
 

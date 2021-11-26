@@ -177,7 +177,6 @@ class Campania implements JsonSerializable {
             ]
         );
 
-
         $campanias = [];
         $campanias = $database->select(
             'campanias',
@@ -191,13 +190,11 @@ class Campania implements JsonSerializable {
                 'cliente_id'
             ],
             [
-                "ORDER" => ['fecha_inicio'  => "DESC"]
-            ],
-            [
                 'OR' => [
                     'nombre[~]' => $search,
                     'fecha_inicio[~]' => $search
-                ]
+                ],
+                "ORDER" => ['fecha_inicio'  => "DESC"]
             ]
         );
 
