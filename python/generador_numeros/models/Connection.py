@@ -1,5 +1,5 @@
-import mariadb
 import sys
+import mariadb
 from . import configdb
 #Crear archivo configdb.py con las siguientes constantes(cada una con los valores correspondientes a tu base de datos):
 #USER='root'
@@ -10,13 +10,13 @@ from . import configdb
 
 #Coneccion con la bd con patron de diseño Singleton
 class Connection:
-    __database = None
+    database = None
     
     @staticmethod
     def getConnection():
-        if(Connection.__database == None):
+        if(Connection.database == None):
             try:
-                Connection.__database = mariadb.connect(
+                Connection.database = mariadb.connect(
                     user=configdb.USER,
                     password=configdb.PASS,
                     host=configdb.HOST,
@@ -27,5 +27,5 @@ class Connection:
                 print(f"Error al conectar con la base de datos: {e}")
                 sys.exit(1)
                 
-        return Connection.__database.cursor()
+        return Connection.database.cursor()
     
