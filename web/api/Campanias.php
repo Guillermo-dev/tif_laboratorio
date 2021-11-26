@@ -71,7 +71,7 @@ abstract class Campanias {
         else throw new Exception('Fecha de inicio requerida');
 
         if (Campania::invalidFecha($campania->getFechaInicio(), $campania->getCantidadMensajes()))
-            throw new Exception('Fecha de inicio invalida');
+            throw new Exception('La cantidad de mensajes excede el maximo en el dia seleccionado');
 
         $campania->setClienteId($clienteId);
 
@@ -111,7 +111,7 @@ abstract class Campanias {
         } else throw new Exception('Fecha invalida');
 
         if (Campania::invalidFecha($campania->getFechaInicio(), $campania->getCantidadMensajes(), $campania->getId()))
-            throw new Exception('Fecha invalida');
+            throw new Exception('La cantidad de mensajes excede el maximo en el dia seleccionado');
 
         if (isset($data->localidades)) {
             $localidadesIds = [];
