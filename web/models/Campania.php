@@ -107,6 +107,28 @@ class Campania implements JsonSerializable {
     public static function getCampanias(): array {
         $database = Connection::getDatabase();
 
+        $database->update(
+            'campanias', [
+                'estado' => 'ejecucion'
+            ],[
+                'fecha_inicio' => date('o-m-d')
+            ]
+        );
+        $database->update(
+            'campanias', [
+                'estado' => 'creada'
+            ],[
+                'fecha_inicio[>]' => date('o-m-d')
+            ]
+        );
+        $database->update(
+            'campanias', [
+                'estado' => 'finalizada'
+            ],[
+                'fecha_inicio[<]' => date('o-m-d')
+            ]
+        );
+
         $campanias = [];
         $campanias = $database->select(
             'campanias',

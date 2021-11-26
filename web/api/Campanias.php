@@ -13,17 +13,9 @@ abstract class Campanias {
 
     public static function getCampanias(): void {
         if (isset($_GET['search']))
-            $campanias = Campania::getCampaniasSearch($_GET['search']);
+            Response::getResponse()->appendData('campanias',  Campania::getCampaniasSearch($_GET['search']));
         else
-            $campanias =  Campania::getCampanias();
-
-        foreach ($campanias as $campania) {
-            $campania = Campania::getCampaniaById($campania['campania_id']);
-            $campania->updateEstado();
-            Campania::updateCampania($campania);
-        }
-
-        Response::getResponse()->appendData('campanias', $campanias);
+            Response::getResponse()->appendData('campanias', Campania::getCampanias());
     }
 
     public static function getCampania(int $id = 0): void {
