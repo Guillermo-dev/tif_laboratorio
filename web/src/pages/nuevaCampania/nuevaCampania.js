@@ -53,7 +53,7 @@ clienteForm.onsubmit = function (event) {
                         });
                     }
                 } else {
-                    window.iziToast.error({message: response.error});
+                    window.iziToast.error({message: response.error.error});
                 }
             })
             .catch(reason => {

@@ -6,6 +6,12 @@ const url = window.location.pathname;
 const id = url.substring(url.lastIndexOf('/') + 1);
 
 clienteForm.onsubmit = function (event) {
+
+    if(clienteForm['razon_social'].value === 'Seleccione una opción'){
+        window.iziToast.warning({ message: 'Seleccionar una razon social valida' });
+        return false;
+    }
+
     const data = {
         cuil_cuit: clienteForm['cuil_cuit'].value,
         razon_social: clienteForm['razon_social'].value,
@@ -25,7 +31,7 @@ clienteForm.onsubmit = function (event) {
         if (response.status === 'success') {
             window.iziToast.success({ message: 'El cliente se actualizo con exito' });
         } else {
-            window.iziToast.error({ message: response.error });
+            window.iziToast.error({ message: response.error.error });
         }
     }).catch(reason => {
         window.iziToast.error({ message: reason.toString() });
