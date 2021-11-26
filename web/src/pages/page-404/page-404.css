@@ -1,0 +1,14 @@
+@import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+html, body {
+    width: 100vw;
+    min-height: 100vh;
+}
+
+body {
+    background-color: #5B2A67;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}

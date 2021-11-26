@@ -2,11 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="/src/global/images/favicon.ico" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/src/pages/page-404/">
+    <link type="text/css" rel="stylesheet" href="page-404.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 Not Found</title>
 </head>
 <body>
-    <div>404</div>
+    <div>
+        <div class="row">
+            <div class="col h2 fw-bold">404</div>
+            <div class="col h2 text-nowrap fw-light border-start border-2 border-secondary">Not found</div>
+        </div>
+        <div class="text-center">
+            <a class="link-warning text-decoration-none" href="javascript:void(0);" onclick="history.back();">Go back</a>
+        </div>
+    </div>
 </body>
 </html>
