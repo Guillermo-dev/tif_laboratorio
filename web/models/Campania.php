@@ -93,13 +93,13 @@ class Campania implements JsonSerializable {
         return get_object_vars($this);
     }
 
-    public static function updateEstado($fecha_inicio): string {
-        if (date('o-m-d') == $fecha_inicio) {
-            return 'ejecucion';
-        } else if (date('o-m-d') < $fecha_inicio) {
-            return 'creada';
+    public function updateEstado(): void {
+        if (date('o-m-d') == $this->getFechaInicio()) {
+            $this->setEstado('ejecucion');
+        } else if (date('o-m-d') < $this->getFechaInicio()) {
+            $this->setEstado('creada');
         } else
-            return 'finalizada';
+            $this->setEstado('finalizada');
     }
 
     /**************************** Metodos BD ****************************/
@@ -120,21 +120,9 @@ class Campania implements JsonSerializable {
                 'cliente_id'
             ],
             [
-                "ORDER" => 'fecha_inicio'
+                "ORDER" => ['fecha_inicio'  => "DESC"]
             ]
         );
-
-        if ($campanias != []) {
-            foreach ($campanias as $campania) {
-                if (date('o-m-d') === $campania["fecha_inicio"]) {
-                    $campania['estado'] = 'ejecucion';
-                } else if (date('o-m-d') < $campania["fecha_inicio"]) {
-                    $campania['estado'] = 'creada';
-                } else {
-                    $campania['estado'] = 'finalizada';
-                }
-            }
-        }
 
         if (isset($database->error))
             throw new Exception($database->error);
@@ -158,7 +146,7 @@ class Campania implements JsonSerializable {
                 'cliente_id'
             ],
             [
-                "ORDER" => 'fecha_inicio'
+                "ORDER" => ['fecha_inicio'  => "DESC"]
             ],
             [
                 'OR' => [

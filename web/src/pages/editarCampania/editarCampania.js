@@ -166,9 +166,11 @@ function procesarCampania(campania, cliente, localidades) {
 
 function  createOptions(localidades){
     localidades.forEach((localidad) => {
+        const {pais, provincia, ciudad, localidad_id} = localidad;
+
         const option = document.createElement("option");
-        option.value = localidad.localidad_id
-        option.innerText = localidad.pais + ', ' + localidad.provincia + ', ' + localidad.ciudad;
+        option.value = localidad_id
+        option.innerText = pais + ', ' + provincia + ', ' + ciudad;
 
         dropLocalidades.append(option);
     });
