@@ -223,7 +223,7 @@ class Cliente implements JsonSerializable {
         return $cliente;
     }
 
-    public static function getClienteByCuil(int $cuil_cuit): ?Cliente {
+    public static function getClienteByCuil(string $cuil_cuit): ?Cliente {
         $database = Connection::getDatabase();
 
         $clientes = $database->select(
