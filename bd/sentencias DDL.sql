@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS campanias (
   nombre VARCHAR(25) NOT NULL UNIQUE,
   texto_SMS TEXT NOT NULL,
   cantidad_mensajes VARCHAR(10) NOT NULL CHECK (cantidad_mensajes IN ('7000', '14000', '21000', '28000', '35000', '42000', '49000', '56000', '63000', '70000')),
-  estado VARCHAR(10) NOT NULL CHECK (estado IN ( 'creada', 'ejecucion', 'finalizada')),
+  estado VARCHAR(10) NOT NULL CHECK (estado IN ( 'creada', 'en ejecucion', 'finalizada')),
   fecha_inicio DATE NOT NULL,
   cliente_id INT UNSIGNED NOT NULL,
   FOREIGN KEY (cliente_id) REFERENCES clientes (cliente_id)
@@ -35,11 +35,11 @@ CREATE TABLE IF NOT EXISTS campanias_localidades (
   localidad_id INT UNSIGNED NOT NULL,
   PRIMARY KEY (campania_id, localidad_id),
   FOREIGN KEY (campania_id) REFERENCES campanias(campania_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   FOREIGN KEY (localidad_id) REFERENCES localidades(localidad_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS prefijos_internacionales (
