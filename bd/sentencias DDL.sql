@@ -35,11 +35,11 @@ CREATE TABLE IF NOT EXISTS campanias_localidades (
   localidad_id INT UNSIGNED NOT NULL,
   PRIMARY KEY (campania_id, localidad_id),
   FOREIGN KEY (campania_id) REFERENCES campanias(campania_id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   FOREIGN KEY (localidad_id) REFERENCES localidades(localidad_id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS prefijos_internacionales (
@@ -59,12 +59,12 @@ CREATE TABLE IF NOT EXISTS numeros (
   codigo_area_id INT UNSIGNED NOT NULL,
   prefijo_internacional_id INT UNSIGNED NOT NULL,
   FOREIGN KEY (localidad_id) REFERENCES localidades (localidad_id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   FOREIGN KEY (prefijo_internacional_id) REFERENCES prefijos_internacionales(prefijo_internacional_id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   FOREIGN KEY (codigo_area_id) REFERENCES codigos_area (codigo_area_id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );

@@ -10,13 +10,13 @@ from . import configdb
 
 #Coneccion con la bd con patron de diseño Singleton
 class Connection:
-    database = None
+    __database = None
     
     @staticmethod
     def getConnection():
-        if(Connection.database == None):
+        if(Connection.__database == None):
             try:
-                Connection.database = mariadb.connect(
+                Connection.__database = mariadb.connect(
                     user=configdb.USER,
                     password=configdb.PASS,
                     host=configdb.HOST,
@@ -27,5 +27,9 @@ class Connection:
                 print(f"Error al conectar con la base de datos: {e}")
                 sys.exit(1)
                 
-        return Connection.database.cursor()
+        return Connection.__database.cursor()
+    
+    def commit():
+        Connection.__database.commit()
+        Connection.__database.close()
     

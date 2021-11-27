@@ -26,6 +26,5 @@ for _ in itertools.repeat(None, int(repetir)):
 	nro = random.randrange(100000, 999999)
 	codigo= random.randrange(1,int(cantidad_localidades))
 	localidad = codigo
-	cur.execute("INSERT INTO numeros(numero,localidad_id,prefijo_internacional_id,codigo_area_id) values (?, ?, ?, ?)", (str(nro),str(localidad),1,str(codigo)))
-Connection.database.commit()
-Connection.database.close()
+	cur.execute("INSERT INTO numeros (numero, localidad_id, prefijo_internacional_id, codigo_area_id) VALUES (?, ?, ?, ?)", (str(nro), localidad, 1, codigo))
+Connection.commit()
