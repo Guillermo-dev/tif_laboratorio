@@ -44,7 +44,7 @@ class Cliente(object):
     def getClienteByCampania(campania_id):
         cursor = Connection.getConnection()
         
-        cursor.execute("SELECT C.cliente_id, C.cuil_cuit, C.razon_social, C.nombre, C.apellido, C.telefono, C.email FROM clientes C INNER JOIN campanias CA ON CA.cliente_id = CA.cliente_id WHERE CA.campania_id = "+campania_id)
+        cursor.execute("SELECT C.cliente_id, C.cuil_cuit, C.razon_social, C.nombre, C.apellido, C.telefono, C.email FROM clientes C INNER JOIN campanias CA ON CA.cliente_id = C.cliente_id WHERE CA.campania_id = "+campania_id)
         clienteData = cursor.fetchall()
         
         return clienteData
