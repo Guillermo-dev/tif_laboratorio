@@ -1,30 +1,31 @@
 #Codigo fuente del script para generar los numeros telefonicos y guardarlos en la bd del punto 3.
-#Para hacer los insert es necesario ejecutar "SET GLOBAL FOREIGN_KEY_CHECKS=0;" en la base de datos
-#https://stackoverflow.com/questions/21659691/error-1452-cannot-add-or-update-a-child-row-a-foreign-key-constraint-fails
 import random
 import itertools
 from models.Connection import Connection
 from re import split
 
 cur = Connection.getConnection()
-cur.execute("SELECT MAX(localidad_id) FROM localidades;")
 caracteres = "['(,)']"
-
-for (localidad_id) in cur:
-	cantidad_localidades = str(localidad_id)
-#Las lineas 15 a 17 son para limpiar los caracteres dejando solo numeros.
-#Se usa para elegir de manera aleatoria una localidad al insertar un numero.
-#Extraigo los numeros del string (https://www.youtube.com/watch?v=K_KRa-3ZylQ)
-cantidad_localidades = split('/D+',cantidad_localidades)
-cantidad_localidades = cantidad_localidades[0]
-#Elimino los caracteres indicados en la variable caracteres(https://www.delftstack.com/es/howto/python/remove-certain-characters-from-string-python/)
-cantidad_localidades = ''.join(x for x in cantidad_localidades if x not in caracteres)
+cur.execute("SELECT localidad_id FROM localidades;")
+localidades = cur.fetchall()
 
 
-repetir = 5
+repetir = 75
 for _ in itertools.repeat(None, int(repetir)):
+	#Genero un numero random
 	nro = random.randrange(100000, 999999)
-	codigo= random.randrange(1,int(cantidad_localidades))
-	localidad = codigo
+	# -----------------------------------------------------------------------------------
+	# - Las lineas 22-27 son para limpiar los caracteres dejando solo numeros.			-
+	# - Se usa para elegir de manera aleatoria una localidad							-
+	# -----------------------------------------------------------------------------------
+	#Tomo una localidad aleatoria de la lista
+	codigo = str(localidades[random.randrange(0, int(len(localidades)))]) 
+	#Extraigo los numeros del string (https://www.youtube.com/watch?v=K_KRa-3ZylQ)
+	codigo = split('/D+',codigo) 
+	codigo = codigo[0]
+	#Elimino los caracteres indicados en la variable caracteres(https://www.delftstack.com/es/howto/python/remove-certain-characters-from-string-python/)
+	codigo = ''.join(x for x in codigo if x not in caracteres)
+	#El id del codigo de area y localidad coinciden
+	localidad = codigo 
 	cur.execute("INSERT INTO numeros (numero, localidad_id, prefijo_internacional_id, codigo_area_id) VALUES (?, ?, ?, ?)", (str(nro), localidad, 1, codigo))
 Connection.commit()
