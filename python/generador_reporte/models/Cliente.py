@@ -1,3 +1,5 @@
+from models.Connection import Connection
+
 class Cliente(object):
     __cliente_id = 0
     __cuil_cuit = ''
@@ -36,3 +38,13 @@ class Cliente(object):
 
     def get_email(self):
         return self.__email
+
+#############################################################
+
+    def getClienteByCampania(campania_id):
+        cursor = Connection.getConnection()
+        
+        cursor.execute("SELECT C.cliente_id, C.cuil_cuit, C.razon_social, C.nombre, C.apellido, C.telefono, C.email FROM clientes C INNER JOIN campanias CA ON CA.cliente_id = CA.cliente_id WHERE CA.campania_id = "+campania_id)
+        clienteData = cursor.fetchall()
+        
+        return clienteData

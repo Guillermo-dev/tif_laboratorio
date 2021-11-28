@@ -29,3 +29,7 @@ class Connection:
                 
         return Connection.__database.cursor()
     
+    def commit():
+        Connection.__database.commit()
+        Connection.__database.close()
+    

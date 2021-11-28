@@ -1,3 +1,5 @@
+from models.Connection import Connection
+
 class Campania(object):
     __campania_id = 0
     __nombre = ''
@@ -37,3 +39,12 @@ class Campania(object):
     def get_cliente_id(self):
         return self.__cliente_id
 
+#############################################################
+
+    def getCampanias():
+        cursor = Connection.getConnection()
+        
+        cursor.execute("SELECT campania_id, nombre, texto_SMS, cantidad_mensajes, estado, fecha_inicio, cliente_id FROM campanias WHERE estado = 'finalizada'")
+        campanias = cursor.fetchall()
+        
+        return campanias

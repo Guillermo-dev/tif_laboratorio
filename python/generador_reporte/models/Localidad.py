@@ -1,3 +1,5 @@
+from models.Connection import Connection
+
 class Localidad(object):
     __localidad_id = 0
     __pais = ''
@@ -21,4 +23,13 @@ class Localidad(object):
 
     def get_ciudad(self):
         return self.__ciudad
-    
+
+    #############################################################
+
+    def getLocalidadByCampania(campania_id):
+        cursor = Connection.getConnection()
+        
+        cursor.execute("SELECT L.localidad_id, L.pais, L.provincia, L.ciudad FROM campanias_localidades C INNER JOIN localidades L ON L.localidad_id = C.localidad_id WHERE C.campania_id ="+campania_id)
+        localidadesData= cursor.fetchall()
+        
+        return localidadesData
