@@ -1,5 +1,5 @@
-import sys
 import mariadb
+import sys
 from . import configdb
 #Crear archivo configdb.py con las siguientes constantes(cada una con los valores correspondientes a tu base de datos):
 #USER='root'
@@ -28,7 +28,4 @@ class Connection:
                 sys.exit(1)
                 
         return Connection.__database.cursor()
-
-    def commit():
-        Connection.__database.commit()
-        Connection.__database.close()    
+    

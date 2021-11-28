@@ -4,3 +4,4 @@ vendor
 web/config/db-config.conf
 configdb.py
 __pycache__
+reporte_campania.xls
