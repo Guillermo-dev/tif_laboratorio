@@ -42,9 +42,12 @@ class Campania(object):
 #############################################################
 
     def getCampanias():
-        cursor = Connection.getConnection()
-        
-        cursor.execute("SELECT campania_id, nombre, texto_SMS, cantidad_mensajes, estado, fecha_inicio, cliente_id FROM campanias WHERE estado = 'finalizada'")
-        campanias = cursor.fetchall()
-        
+        try:
+            cursor = Connection.getConnection()
+            
+            cursor.execute("SELECT campania_id, nombre, texto_SMS, cantidad_mensajes, estado, fecha_inicio, cliente_id FROM campanias WHERE estado = 'finalizada'")
+            campanias = cursor.fetchall()
+        except Exception as e:
+            print ("Error interno:", e)
+            
         return campanias

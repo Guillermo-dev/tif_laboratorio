@@ -12,22 +12,73 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-def numeroInvalido(numero):
+def enivarEmail(campania,cliente):
+    try:
+        emisor = "DannaFox.cam@gmail.com"
+        receptor = cliente.get_email()
+
+        msg = MIMEMultipart()
+
+        msg['From'] = emisor
+        msg['To'] = receptor
+
+        #Asunto
+        msg['Subject'] = "Planilla de reporte"
+
+        # Cuerpo
+        cuerpo = "Resumen de la campaña publicitaria con nombre:"+campania.get_nombre()
+
+        msg.attach(MIMEText(cuerpo, 'plain'))
+
+        # Agregar excel al email
+        filename = "reporte_campania.xls"
+        ############################################## CREAR CARPETA config y dentro el archivo config.py que dentro tendra una constante del estilo a  PATH = "C:/Users/guill/OneDrive/Escritorio/Laboratorio de lenguaje/trabajofinal/reporte_campania.xls"
+        attachment = open(config.PATH, "rb")
+
+        # instance of MIMEBase and named as p
+        p = MIMEBase('application', 'octet-stream')
+        p.set_payload((attachment).read())
+        encoders.encode_base64(p)
+        p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+        
+        msg.attach(p)
+
+        # Crear SMTP session
+        session = smtplib.SMTP('smtp.gmail.com', 587)
+        session.starttls()
+
+        # Login de emisor
+        session.login(emisor, "Dana12345")
+
+        # Convertir mensaje a string
+        text = msg.as_string()
+
+        # Envio de email
+        session.sendmail(emisor, receptor, text)
+        session.quit()
+        
+        input("EMAIL ENVIADO CON EXITO (Presione cualquier tecla para continuar)")
+    except Exception as e:
+        print ("Error al enviar el email:", e)
+
+def numeroInvalido(numero, cantCapmanias):
     try:
         numero = int(numero)
+        if(numero > cantCapmanias):
+            return True
         return False
     except ValueError:
         return True
         
-try:
-    campanias = Campania.getCampanias()
+def generarReporte(campanias):
     i = 1
     for campania in campanias:
         print(i,') Nombre:', campania[1],', Fecha inicio:',campania[5])
         i += 1
+    
     res = input('Seleccione la campaña que quiere enviar el reporte:')
-    while(numeroInvalido(res)):
-        res = input('Seleccione la campaña que quiere enviar el reporte:')
+    while(numeroInvalido(res, len(campanias))):
+        res = input('Seleccione una campaña valida:')
     res = int(res)-1
     
     campania = Campania(campanias[res][0],campanias[res][1],campanias[res][2],campanias[res][3],campanias[res][4],campanias[res][5],campanias[res][6])
@@ -39,67 +90,23 @@ try:
     localidades = []
     for localidadData in localidadesData:
         localidad = Localidad(localidadData[0],localidadData[1],localidadData[2],localidadData[3])
-        localidades.append(localidad)
-         
-except Exception as e:
-    print ("Error interno:", e)
+        localidades.append(localidad)   
 
-try:
-    m2e = campaniaToExcel('Reporte de Campaña')
+    try:
+        m2e = campaniaToExcel('Reporte de Campaña')
+        
+        m2e.agregarPlanilla(campania, cliente, localidades)
+        
+        m2e.guardarPlanilla("reporte_campania.xls")
+        
+    except Exception as e:
+        print ("Error al crear el reporte:", e)
+        
+    enivarEmail(campania, cliente)
     
-    m2e.agregarPlanilla(campania, cliente, localidades)
-    
-    m2e.guardarPlanilla("reporte_campania.xls")
-    
-except Exception as e:
-    print ("Error al crear el reporte:", e)
-
-
-#ENVIO DE EMAIL
-try:
-    emisor = "DannaFox.cam@gmail.com"
-    receptor = cliente.get_email()
-
-    msg = MIMEMultipart()
-
-    msg['From'] = emisor
-    msg['To'] = receptor
-
-    #Asunto
-    msg['Subject'] = "Planilla de reporte"
-
-    # Cuerpo
-    cuerpo = "Resumen de la campaña publicitaria con nombre:"+campania.get_nombre()
-
-    msg.attach(MIMEText(cuerpo, 'plain'))
-
-    # Agregar excel al email
-    filename = "reporte_campania.xls"
-    ############################################## CREAR CARPETA config y dentro el archivo config.py que dentro tendra una constante del estilo a  PATH = "C:/Users/guill/OneDrive/Escritorio/Laboratorio de lenguaje/trabajofinal/reporte_campania.xls"
-    attachment = open(config.PATH, "rb")
-
-    # instance of MIMEBase and named as p
-    p = MIMEBase('application', 'octet-stream')
-    p.set_payload((attachment).read())
-    encoders.encode_base64(p)
-    p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
-    
-    msg.attach(p)
-
-    # Crear SMTP session
-    session = smtplib.SMTP('smtp.gmail.com', 587)
-    session.starttls()
-
-    # Login de emisor
-    session.login(emisor, "Dana12345")
-
-    # Convertir mensaje a string
-    text = msg.as_string()
-
-    # Envio de email
-    session.sendmail(emisor, receptor, text)
-    session.quit()
-    
-    print("EMAIL ENVIADO CON EXITO")
-except Exception as e:
-    print ("Error al enviar el email:", e)
+#MAIN
+campanias = Campania.getCampanias()
+if(campanias == []):
+    input("Por el momento no se a finalizado ninguna campaña (Presione cualquier tecla para continuar)")
+else:
+    generarReporte(campanias)
