@@ -13,7 +13,7 @@ buscadorForm.onsubmit = function () {
     try {
         fetchCampanias();
     } catch (error) {
-        window.iziToast.error({message: error.toString()});
+        window.iziToast.error({ message: error.toString() });
     }
     return false;
 }
@@ -43,11 +43,11 @@ function fetchCampanias() {
 
                 procesarCampanias();
             } else {
-                window.iziToast.error({message: 'Error al obtener las campañas'});
+                window.iziToast.error({ message: 'Error al obtener las campañas' });
             }
         })
         .catch(reason => {
-            window.iziToast.error({message: reason.toString()});
+            window.iziToast.error({ message: reason.toString() });
         });
 }
 
@@ -55,10 +55,11 @@ function createCampania(campania) {
     const element = campaniaTemplate.content.firstElementChild.cloneNode(true);
 
     const data = element.querySelectorAll('[data-js="data"]');
+    var date = new Date(campania.fecha_inicio)
 
     data[0].textContent = campania.nombre;
 
-    data[1].textContent = campania.fecha_inicio;
+    data[1].textContent = (date.getDate() + 1) + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
 
     data[2].textContent = campania.cantidad_mensajes;
 
@@ -71,7 +72,7 @@ function createCampania(campania) {
     buttons[0].onclick = function () {
         location.href =
             `/editarCampania/${campania.campania_id}`
-        ;
+            ;
     }
 
     buttons[1].onclick = function () {
@@ -91,14 +92,14 @@ function createCampania(campania) {
                     .then(httpResp => httpResp.json())
                     .then(response => {
                         if (response.status === 'success') {
-                            window.iziToast.success({message: 'La campaña se eliminó con éxito!'});
+                            window.iziToast.success({ message: 'La campaña se eliminó con éxito!' });
                             element.remove();
                         } else {
-                            window.iziToast.error({message: response.error.error});
+                            window.iziToast.error({ message: response.error.error });
                         }
                     })
                     .catch(reason => {
-                        window.iziToast.error({message: reason.toString()});
+                        window.iziToast.error({ message: reason.toString() });
                     });
             }
         });
