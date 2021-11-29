@@ -21,7 +21,7 @@ cantArchivos=0
 campanias = cursor.fetchall()#arreglo de campanias
 
 
-cantidadCampanias=int(''.join(map(str, cantCampanias[0])))#me convierte la consulta de count en un entero
+cantidadCampanias=int(''.join(map(str, cantCampanias[0])))#me convierte la consulta de count en un entero. Pasa la tupla a entero
 
 
 
@@ -29,7 +29,7 @@ while (cantArchivos<cantidadCampanias):
     
     campania = campanias[cantArchivos] #campania que se esta procesando
 
-    numerosPorCampania = []
+    numerosPorCampania = []#Arreglo de los numeros por campaña en proceso
 
     cantMensajes = 0
     numeroArc=1
@@ -62,7 +62,7 @@ while (cantArchivos<cantidadCampanias):
                 iLocalidad = 0
             else:
                 iLocalidad = random.randrange(0, len(numeros)-1)#genera numeros aleatorios entre los distintos id de las localidades
-            iNumero = random.randrange(0, len(numeros[iLocalidad])-1)
+            iNumero = random.randrange(0, len(numeros[iLocalidad])-1)#genera un numero random de la localidad i.
 
            
             while(numeros[iLocalidad][iNumero] in numerosPorCampania):#Controla que no sea numero repetido. Si esta repetido, genera nuevamente 2 indices random, y sino lo agrega al arreglo
@@ -71,7 +71,7 @@ while (cantArchivos<cantidadCampanias):
             numerosPorCampania.append(numeros[iLocalidad][iNumero])
 
             "Creacion de la tabla numeros"
-
+            #Pasa las tuplas a string
             prefijo = ''.join(map(str, numeros[iLocalidad][iNumero][0]))
             codigo = ''.join(map(str, numeros[iLocalidad][iNumero][1]))
             numero = ''.join(map(str, numeros[iLocalidad][iNumero][2]))
@@ -91,12 +91,3 @@ while (cantArchivos<cantidadCampanias):
     "Insercion de numeros en la tabla"
     "traer las campañas que tengan el estado en ejecucion (select), inner join campañas localidades"
     "luego traer por cada campaña los numeros telefonicos de las localidades asociadas (select de numeros)"
-
-    
-
-
-    
-    
-    
-    
-
