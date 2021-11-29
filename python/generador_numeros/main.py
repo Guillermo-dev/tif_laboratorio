@@ -10,7 +10,7 @@ cur.execute("SELECT localidad_id FROM localidades;")
 localidades = cur.fetchall()
 
 
-repetir = 75
+repetir = 2000
 for _ in itertools.repeat(None, int(repetir)):
 	#Genero un numero random
 	nro = random.randrange(100000, 999999)
