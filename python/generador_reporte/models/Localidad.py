@@ -27,9 +27,12 @@ class Localidad(object):
     #############################################################
 
     def getLocalidadByCampania(campania_id):
-        cursor = Connection.getConnection()
-        
-        cursor.execute("SELECT L.localidad_id, L.pais, L.provincia, L.ciudad FROM campanias_localidades C INNER JOIN localidades L ON L.localidad_id = C.localidad_id WHERE C.campania_id ="+campania_id)
-        localidadesData= cursor.fetchall()
-        
+        try:
+            cursor = Connection.getConnection()
+            
+            cursor.execute("SELECT L.localidad_id, L.pais, L.provincia, L.ciudad FROM campanias_localidades C INNER JOIN localidades L ON L.localidad_id = C.localidad_id WHERE C.campania_id ="+campania_id)
+            localidadesData= cursor.fetchall()
+        except Exception as e:
+            print ("Error interno:", e)
+             
         return localidadesData

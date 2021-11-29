@@ -1,6 +1,8 @@
 #Codigo fuente del script para generar los numeros telefonicos y guardarlos en la bd del punto 3.
 import random
 import itertools
+
+import mariadb
 from models.Connection import Connection
 from re import split
 
@@ -26,6 +28,10 @@ for _ in itertools.repeat(None, int(repetir)):
 	#Elimino los caracteres indicados en la variable caracteres(https://www.delftstack.com/es/howto/python/remove-certain-characters-from-string-python/)
 	codigo = ''.join(x for x in codigo if x not in caracteres)
 	#El id del codigo de area y localidad coinciden
-	localidad = codigo 
-	cur.execute("INSERT INTO numeros (numero, localidad_id, prefijo_internacional_id, codigo_area_id) VALUES (?, ?, ?, ?)", (str(nro), localidad, 1, codigo))
+	localidad = codigo
+	try:
+		cur.execute("INSERT INTO numeros (numero, localidad_id, prefijo_internacional_id, codigo_area_id) VALUES (?, ?, ?, ?)", (str(nro), localidad, 1, codigo))
+	except mariadb.IntegrityError:
+		pass
+
 Connection.commit()

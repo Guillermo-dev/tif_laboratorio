@@ -84,7 +84,7 @@ campaniaForm.onsubmit = function (event) {
             return false;
         }
 
-        if(campaniaForm['text_SMS'].value.length >= 160){
+        if(campaniaForm['text_SMS'].value.length > 160){
             window.iziToast.warning({message: 'El mensaje debe ser de menos de 160 caracteres'});
             return false;
         }
