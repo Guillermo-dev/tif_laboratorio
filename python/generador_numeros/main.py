@@ -32,6 +32,7 @@ for _ in itertools.repeat(None, int(repetir)):
 	try:
 		cur.execute("INSERT INTO numeros (numero, localidad_id, prefijo_internacional_id, codigo_area_id) VALUES (?, ?, ?, ?)", (str(nro), localidad, 1, codigo))
 	except mariadb.IntegrityError:
+		print ("Clave duplicada, generando otra...")
 		pass
 
 Connection.commit()
