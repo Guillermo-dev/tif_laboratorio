@@ -35,7 +35,7 @@ def enivarEmail(campania,cliente):
         ############################################## CREAR CARPETA config y dentro el archivo config.py que dentro tendra una constante del estilo a  PATH = "C:/Users/guill/OneDrive/Escritorio/Laboratorio de lenguaje/trabajofinal/reporte_campania.xls"
         attachment = open(config.PATH, "rb")
 
-        # instance of MIMEBase and named as p
+        # instancia de MIMEBase y nombrada como p
         p = MIMEBase('application', 'octet-stream')
         p.set_payload((attachment).read())
         encoders.encode_base64(p)
